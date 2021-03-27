@@ -1,0 +1,32 @@
+{% extends 'zurwan.base.html.twig' %}
+
+{% block title %}Zurwan - Éditer un contact{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
+{% endblock %}
+
+{% block body %}
+    <form>
+        {% for key, info in infos %}
+            <div>
+                <label>{{ key }}</label>
+                <input type="text" value="{{ info }}">
+                <i class="fas fa-times-circle"></i>
+            </div>
+        {% endfor %}
+        {% if infos|length < 10 %}
+            <button id="createField">Nouveau champ</button>
+        {% endif %}
+    </form>
+    <button id="updateContact">Mettre à jour le contact</button>
+{% endblock %}
+
+{% block scriptend %}
+    <script>
+        var redirUrl="{{ path('contact_update',{id:id}) }}";</script>
+    <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
+    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+    <script src="{{ asset('assets/js/contactupdate.js') }}"></script>
+{% endblock %}

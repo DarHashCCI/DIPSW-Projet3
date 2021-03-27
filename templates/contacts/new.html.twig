@@ -1,0 +1,26 @@
+{% extends 'zurwan.base.html.twig' %}
+
+{% block title %}Zurwan - Créer un contact{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
+{% endblock %}
+
+{% block body %}
+    <form>
+        <div>
+            <label>Nom</label>
+            <input type="text">
+            <i class="fas fa-times-circle"></i>
+        </div>
+        <button id="createField">Nouveau champ</button>
+    </form>
+    <button id="createContact">Créer le contact</button>
+{% endblock %}
+
+{% block scriptend %}
+    <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
+    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+    <script src="{{ asset('assets/js/contactcreate.js') }}"></script>
+{% endblock %}

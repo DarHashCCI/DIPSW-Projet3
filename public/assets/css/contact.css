@@ -1,0 +1,5 @@
+.ui-state-highlight{
+    box-sizing: content-box;
+    min-height: 20px!important;
+    width:200px;
+}

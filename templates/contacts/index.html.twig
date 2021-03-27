@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactsController!{% endblock %}
+
+{% block body %}
+    {% for infos in request %}
+        {% for key, info in infos %}
+            <strong>{{ key }}</strong> : {{ info }}<br>
+        {% endfor %}
+        <hr>
+    {% endfor %}
+
+{% endblock %}
