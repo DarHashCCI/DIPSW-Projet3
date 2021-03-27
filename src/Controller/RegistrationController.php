@@ -58,12 +58,13 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
+            /* return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
-            );
+            );*/
+            return $this->redirectToRoute('register_success');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -101,5 +102,10 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Votre adresse email a été vérifiée.');
 
         return $this->redirectToRoute('app_register');
+    }
+
+    public function success(): Response
+    {
+        return $this->render('registration/success.html.twig');
     }
 }

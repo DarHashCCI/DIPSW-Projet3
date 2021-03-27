@@ -73,7 +73,7 @@ register_index:
   path: /register
   controller: App\Controller\RegisterController::index
 
-register_create:
-  methods: POST
-  path: /register/create
-  controller: App\Controller\RegisterController::create
+register_success:
+  methods: GET
+  path: /register/success
+  controller: App\Controller\RegistrationController::success
