@@ -107,4 +107,28 @@ $( document ).ready(function() {
             })
         }
     });
+
+    // Ava edit
+    $("body").on("click","#ava",function(){
+        $('#fileinput').trigger('click');
+    });
+
+    $("body").on("change","#fileinput",function(){
+        console.log($("#fileinput").val());
+        var formData = new FormData();
+        var blob = $('input[type=file]')[0].files[0];
+        formData.append('image_path', blob);
+        console.log(formData);
+        $.ajax({
+            method: "POST",
+            url: reredirUrl,
+            contentType: false, // requires jQuery 1.6+
+            processData: false, // required
+            cache: false,
+            data: formData,
+            success: function(){
+                console.log("élément mis à jour");
+            }
+        })
+    });
 });

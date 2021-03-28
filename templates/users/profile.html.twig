@@ -7,9 +7,15 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        <div><img src="" alt="Avatar de l'utilisateur"></div>
-        <div>
+    <div class="row">
+        <div class="col">
+            <img id="ava" src="" alt="Avatar de l'utilisateur">
+            <form enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{{user.id}}">
+            <input id="fileinput" type="file" name="fileinput" style="display:none"/>
+            </form>
+        </div>
+        <div class="col">
             <div><strong>Email :</strong> {{ app.user.email }}</div>
             <div><strong>Nom :</strong> <div {% if user.last_name %}id="lastname" >{{ user.last_name }}{% else %} id="lastnameempty">(non renseigné){% endif %}</div></div>
             <div><strong>Prénom :</strong> <div {% if user.first_name %}id="firstname" >{{ user.first_name }}{% else %} id="firstnameempty">(non renseigné){% endif %}</div>

@@ -88,3 +88,8 @@ users_update:
   methods: PUT
   path: /profile/{id}
   controller: App\Controller\UsersController::update
+
+users_updateava:
+  methods: POST
+  path: /profile/{id}
+  controller: App\Controller\UsersController::updateAva

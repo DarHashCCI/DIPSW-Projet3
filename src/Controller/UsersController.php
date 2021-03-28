@@ -67,7 +67,6 @@ class UsersController extends AbstractController
         $entityManager=$this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user=$repository->find($request->request->get('id'));
-        //dd($user);
         if(!$user){
             throw $this->createNotFoundException("Utilisateur introuvable");
         }
@@ -85,5 +84,10 @@ class UsersController extends AbstractController
         }
         $entityManager->flush();
         return new Response("ok");
+    }
+
+    public function updateAva(Request $request,$id)
+    {
+        dd($request->files->all());
     }
 }
