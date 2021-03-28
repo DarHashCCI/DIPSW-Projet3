@@ -88,6 +88,9 @@ class UsersController extends AbstractController
 
     public function updateAva(Request $request,$id)
     {
-        dd($request->files->all());
+        $newava=$request->files->get('newava');
+        $dest=$this->getParameter('kernel.project_dir').'/public/uploads/ava';
+        $newava->move($dest,$id.".png");
+        return new Response("ok");
     }
 }

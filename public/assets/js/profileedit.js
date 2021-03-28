@@ -117,7 +117,7 @@ $( document ).ready(function() {
         console.log($("#fileinput").val());
         var formData = new FormData();
         var blob = $('input[type=file]')[0].files[0];
-        formData.append('image_path', blob);
+        formData.append('newava', blob);
         console.log(formData);
         $.ajax({
             method: "POST",
@@ -128,6 +128,8 @@ $( document ).ready(function() {
             data: formData,
             success: function(){
                 console.log("élément mis à jour");
+                d = new Date();
+                $("#ava").attr("src","../uploads/ava/"+realId+".png?"+d.getTime());
             }
         })
     });
