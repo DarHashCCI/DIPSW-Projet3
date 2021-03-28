@@ -74,6 +74,9 @@ class UsersController extends AbstractController
         if($ln=$request->request->get('ln')){
             $user->setLastName((string) $ln);
         }
+        if($fn=$request->request->get('fn')){
+            $user->setFirstName((string) $fn);
+        }
         $entityManager->flush();
         return new Response("ok");
     }

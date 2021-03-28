@@ -11,8 +11,8 @@
         <div><img src="" alt=""></div>
         <div>
             <div><strong>Email :</strong> {{ app.user.email }}</div>
-            <div><strong>Nom :</strong> <div {% if user.last_name %}id="firstname" >{{ user.last_name }}{% else %} id="firstnameempty">(non renseigné){% endif %}</div></div>
-            <div><strong>Prénom :</strong> {% if user.first_name %}{{ user.first_name }}{% else %}(non renseigné){% endif %}</div>
+            <div><strong>Nom :</strong> <div {% if user.last_name %}id="lastname" >{{ user.last_name }}{% else %} id="lastnameempty">(non renseigné){% endif %}</div></div>
+            <div><strong>Prénom :</strong> <div {% if user.first_name %}id="firstname" >{{ user.first_name }}{% else %} id="firstnameempty">(non renseigné){% endif %}</div>
             <div><strong>Sexe :</strong>
                 {% if user.sex==1 %}
                     Homme
