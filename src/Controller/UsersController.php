@@ -80,6 +80,9 @@ class UsersController extends AbstractController
         if($sx=$request->request->get('sx')){
             $user->setSex((integer) $sx);
         }
+        if($bi=$request->request->get('bi')){
+            $user->setBio($bi);
+        }
         $entityManager->flush();
         return new Response("ok");
     }

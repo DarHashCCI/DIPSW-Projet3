@@ -3,7 +3,7 @@
 {% block title %}Zurvan - dashboard{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/dash.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -21,7 +21,7 @@
                 {% endif %}
             </div>
 
-            <div><strong>Bio :</strong> {% if user.bio %}{{ user.bio }}{% else %}(non renseigné){% endif %}</div>
+            <div><strong>Bio :</strong><br><div {% if user.bio %}id="bio" >{{ user.bio }}{% else %} id="bioempty" >(non renseigné){% endif %}</div></div>
         </div>
     </div>
 {% endblock %}

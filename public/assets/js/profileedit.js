@@ -81,4 +81,30 @@ $( document ).ready(function() {
             })
     });
 
+    //Bio edit
+    $("body").on("click","#bioempty",function(){
+        $(this).replaceWith('<textarea id="bioedit" placeholder="Parlez nous un peu de vous"></textarea><i id="bioupdate" class="fas fa-save"></i>');
+    });
+
+    $("body").on("click","#bio",function(){
+        $(this).replaceWith('<textarea id="bioedit">'+$(this).text()+'</textarea><i id="bioupdate" class="fas fa-save"></i>');
+    });
+
+    $("body").on("click","#bioupdate",function(){
+        var bi=$('#bioedit').val();
+        if ($('#bioedit').val().length>=255)
+            alert("Wowowowo, on a dit 'Biographie', on ne vous a pas demandé d'écrire un roman !")
+        else if ($('#bioedit').val().length>0) {
+            $('#bioedit').replaceWith('<div id="bio">'+$('#bioedit').val()+'</div>');
+            $(this).remove();
+            $.ajax({
+                method: "PUT",
+                url: reredirUrl,
+                data: {id:realId,bi:bi},
+                success: function(){
+                    console.log("élément mis à jour");
+                }
+            })
+        }
+    });
 });
