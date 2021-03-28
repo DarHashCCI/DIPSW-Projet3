@@ -77,6 +77,9 @@ class UsersController extends AbstractController
         if($fn=$request->request->get('fn')){
             $user->setFirstName((string) $fn);
         }
+        if($sx=$request->request->get('sx')){
+            $user->setSex((integer) $sx);
+        }
         $entityManager->flush();
         return new Response("ok");
     }

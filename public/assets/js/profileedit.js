@@ -52,10 +52,33 @@ $( document ).ready(function() {
         }
     });
 
-
     //Sex edit
+    $("body").on("click","#gender",function(){
+        console.log($(this).html());
+        switch($(this).text()){
+            case "Homme":$(this).replaceWith('<select name="gender" id="genderedit"><option value="1" selected="selected">Homme</option><option value="2">Femme</option><option value="3">Autre</option></select><i id="genderupdate" class="fas fa-save"></i>');;break;
+            case "Femme":$(this).replaceWith('<select name="gender" id="genderedit"><option value="1">Homme</option><option value="2" selected="selected">Femme</option><option value="3">Autre</option></select><i id="genderupdate" class="fas fa-save"></i>');;break;
+            case "Autre":$(this).replaceWith('<select name="gender" id="genderedit"><option value="1">Homme</option><option value="2">Femme</option><option value="3" selected="selected">Autre</option></select><i id="genderupdate" class="fas fa-save"></i>');;break;
+            default :$(this).replaceWith('<select name="gender" id="genderedit"><option value="1">Homme</option><option value="2">Femme</option><option value="3">Autre</option></select><i id="genderupdate" class="fas fa-save"></i>');;break;
+        }
+    });
 
-
-
+    $("body").on("click","#genderupdate",function(){
+            var sx=$("#genderedit").val();
+            switch(sx){
+                case "1":$("#genderedit").replaceWith('<div id="gender">Homme</div>');break;
+                case "2":$("#genderedit").replaceWith('<div id="gender">Femme</div>');break;
+                case "3":$("#genderedit").replaceWith('<div id="gender">Autre</div>');break;
+            }
+            $(this).remove();
+            $.ajax({
+                method: "PUT",
+                url: reredirUrl,
+                data: {id:realId,sx:sx},
+                success: function(){
+                    console.log("élément mis à jour");
+                }
+            })
+    });
 
 });

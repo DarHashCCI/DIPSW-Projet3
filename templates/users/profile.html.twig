@@ -14,12 +14,10 @@
             <div><strong>Nom :</strong> <div {% if user.last_name %}id="lastname" >{{ user.last_name }}{% else %} id="lastnameempty">(non renseigné){% endif %}</div></div>
             <div><strong>Prénom :</strong> <div {% if user.first_name %}id="firstname" >{{ user.first_name }}{% else %} id="firstnameempty">(non renseigné){% endif %}</div>
             <div><strong>Sexe :</strong>
-                {% if user.sex==1 %}
-                    Homme
-                {% elseif user.sex==2 %}
-                    Femme
-                {% else %}
-                    (non renseigné)
+                {% if user.sex==1 %}<div id="gender">Homme</div>
+                {% elseif user.sex==2 %}<div id="gender">Femme</div>
+                {% elseif user.sex==3 %}<div id="gender">Autre</div>
+                {% else %}<div id="gender">(non renseigné)</div>
                 {% endif %}
             </div>
 
@@ -30,7 +28,7 @@
 {% block scriptend %}
     <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
     {% if app.user.id == user.id %}
-        <script>var id={{ user.id}}; </script>
+        <script>var id={{user.id}}; </script>
         <script>
             var redirUrl="{{ path('users_update',{id:user.id}) }}";</script>
         <script src="{{ asset('assets/js/profileedit.js') }}"></script>
