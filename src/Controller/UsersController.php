@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,9 +52,29 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         else{
+            $user=$this->getDoctrine()->getRepository(User::class)
+            ->findNonSecretInfo($id);
+            //dd($user);
+            //Needs $user=null condition
             return $this->render('users/profile.html.twig', [
-                'id' => $id,
+                'user' => $user,
             ]);
         }
+    }
+
+    public function update(Request $request)
+    {
+        $entityManager=$this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user=$repository->find($request->request->get('id'));
+        //dd($user);
+        if(!$user){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+        if($ln=$request->request->get('ln')){
+            $user->setLastName((string) $ln);
+        }
+        $entityManager->flush();
+        return new Response("ok");
     }
 }

@@ -83,3 +83,8 @@ users_profile:
   methods: GET
   path: /profile/{id}
   controller: App\Controller\UsersController::profile
+
+users_update:
+  methods: PUT
+  path: /profile/{id}
+  controller: App\Controller\UsersController::update

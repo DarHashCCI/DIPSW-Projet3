@@ -7,4 +7,32 @@
 {% endblock %}
 
 {% block body %}
+    <div>
+        <div><img src="" alt=""></div>
+        <div>
+            <div><strong>Email :</strong> {{ app.user.email }}</div>
+            <div><strong>Nom :</strong> <div {% if user.last_name %}id="firstname" >{{ user.last_name }}{% else %} id="firstnameempty">(non renseigné){% endif %}</div></div>
+            <div><strong>Prénom :</strong> {% if user.first_name %}{{ user.first_name }}{% else %}(non renseigné){% endif %}</div>
+            <div><strong>Sexe :</strong>
+                {% if user.sex==1 %}
+                    Homme
+                {% elseif user.sex==2 %}
+                    Femme
+                {% else %}
+                    (non renseigné)
+                {% endif %}
+            </div>
+
+            <div><strong>Bio :</strong> {% if user.bio %}{{ user.bio }}{% else %}(non renseigné){% endif %}</div>
+        </div>
+    </div>
+{% endblock %}
+{% block scriptend %}
+    <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
+    {% if app.user.id == user.id %}
+        <script>var id={{ user.id}}; </script>
+        <script>
+            var redirUrl="{{ path('users_update',{id:user.id}) }}";</script>
+        <script src="{{ asset('assets/js/profileedit.js') }}"></script>
+    {% endif %}
 {% endblock %}
