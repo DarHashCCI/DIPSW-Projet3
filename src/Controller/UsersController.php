@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -56,8 +57,10 @@ class UsersController extends AbstractController
             ->findNonSecretInfo($id);
             //dd($user);
             //Needs $user=null condition
+            $filesystem = new Filesystem();
             return $this->render('users/profile.html.twig', [
                 'user' => $user,
+                'ava' => $filesystem->exists('./uploads/ava/'.$id.'.png'),
             ]);
         }
     }

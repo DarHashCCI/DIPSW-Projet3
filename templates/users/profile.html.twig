@@ -9,7 +9,11 @@
 {% block body %}
     <div class="row">
         <div class="col">
-            <img id="ava" src="" alt="Avatar de l'utilisateur">
+        {% if ava %}
+            <img id="ava" src="{{ asset('uploads/ava/'~user.id~'.png') }}" alt="Avatar de l'utilisateur">
+        {% else %}
+            <img id="ava" src="{{ asset('uploads/ava/0.png') }}" alt="Avatar de l'utilisateur">
+        {% endif %}
             <form enctype="multipart/form-data">
             <input type="hidden" name="id" value="{{user.id}}">
             <input id="fileinput" type="file" name="fileinput" style="display:none"/>
