@@ -8,7 +8,7 @@
 
 {% block body %}
     <div>
-        <div><img src="" alt=""></div>
+        <div><img src="" alt="Avatar de l'utilisateur"></div>
         <div>
             <div><strong>Email :</strong> {{ app.user.email }}</div>
             <div><strong>Nom :</strong> <div {% if user.last_name %}id="lastname" >{{ user.last_name }}{% else %} id="lastnameempty">(non renseigné){% endif %}</div></div>
@@ -26,7 +26,6 @@
     </div>
 {% endblock %}
 {% block scriptend %}
-    <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
     {% if app.user.id == user.id %}
         <script>var id={{user.id}}; </script>
         <script>
