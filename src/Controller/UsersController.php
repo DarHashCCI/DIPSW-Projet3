@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends AbstractController
@@ -22,5 +23,10 @@ class UsersController extends AbstractController
         return $this->render('users/index.html.twig', [
             'request' => $contain,
         ]);
+    }
+
+    public function profile (Request $request)
+    {
+
     }
 }

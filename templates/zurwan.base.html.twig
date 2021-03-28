@@ -14,6 +14,15 @@
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
+    {% if app.user %}
+    <header>
+        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo Zurvan">
+        <div>
+            <a href="{{ path("users_profile",{id:app.user.id}) }}">Mon profil</a>
+            <a href="/logout">Déconneion</a>
+        </div>
+    </header>
+    {% endif %}
     <body>
         {% block body %}{% endblock %}
     </body>

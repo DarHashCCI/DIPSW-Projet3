@@ -61,18 +61,7 @@ event_show:
  path: /event/{id}
  controller: App\Controller\EventController::show
 
-#login
-login_index:
-  methods: GET
-  path: /login
-  controller: App\Controller\LoginController::index
-
 #register
-register_index:
-  methods: GET
-  path: /register
-  controller: App\Controller\RegisterController::index
-
 register_success:
   methods: GET
   path: /register/success
@@ -83,3 +72,8 @@ users_home:
   methods: GET
   path: /home/
   controller: App\Controller\UsersController::index
+
+users_profile:
+  methods: GET
+  path: /profile/{id}
+  controller: App\Controller\UsersController::profile
