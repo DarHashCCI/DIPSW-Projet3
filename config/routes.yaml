@@ -2,6 +2,12 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+#Index redirection
+index:
+  methods: GET
+  path: /
+  controller: App\Controller\UsersController::index
+
 #calendar
 calendar:
   methods: GET
@@ -71,7 +77,7 @@ register_success:
 users_home:
   methods: GET
   path: /home/
-  controller: App\Controller\UsersController::index
+  controller: App\Controller\UsersController::home
 
 users_profile:
   methods: GET
