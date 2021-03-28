@@ -56,7 +56,8 @@ class UsersController extends AbstractController
             $user=$this->getDoctrine()->getRepository(User::class)
             ->findNonSecretInfo($id);
             //dd($user);
-            //Needs $user=null condition
+            if($user==null)
+                return $this->render('users/noprofile.html.twig');
             $filesystem = new Filesystem();
             return $this->render('users/profile.html.twig', [
                 'user' => $user,
