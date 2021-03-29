@@ -37,6 +37,16 @@ class Event
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $backColor="red";
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $textColor="white";
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class Event
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getBackColor(): ?string
+    {
+        return $this->backColor;
+    }
+
+    public function setBackColor(string $backColor): self
+    {
+        $this->backColor = $backColor;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->textColor;
+    }
+
+    public function setTextColor(string $textColor): self
+    {
+        $this->textColor = $textColor;
 
         return $this;
     }
