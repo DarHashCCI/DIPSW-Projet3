@@ -1,15 +1,49 @@
 {% extends 'zurwan.base.html.twig' %}
-{% block body %}
-    <a href="{{ path('event_new') }}">Create new booking</a>
-
-    <div id="calendar-holder"></div>
-{% endblock %}
 
 {% block stylesheets %}
     <link href='{{ asset('assets/css/fullcalendar/main.css') }}' rel='stylesheet' />
     <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">-->
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('event_new') }}">Create new booking</a>
+
+    <div id="calendar-holder"></div>
+    <div id="newDateModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nouvelle date</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="newDateForm">
+                        <label for="title">Titre :</label>
+                        <input type="text" name="title"><br>
+                        <label for="description">Description :</label>
+                        <textarea name="description" id="desc" cols="30" rows="10"></textarea><br>
+                        <label for="dateBegin">Début :</label>
+                        <input type="date" name="dateBegin" id="dateBegin">
+                        <input type="time" name="timeBegin" id="timeBegin"><br>
+                        <label for="dateEnd">Fin : </label>
+                        <input type="date" name="dateEnd" id="dateEnd">
+                        <input type="time" name="timeEnd" id="timeEnd"><br>
+                        <label for="colorback">Couleur de fond :</label>
+                        <input type="color" name="colorback"><br>
+                        <label for="colorfont">Couleur de police:</label>
+                        <input type="color" name="colorfont"><br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="newDateButton" type="button" class="btn btn-primary">Créer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block scriptend %}

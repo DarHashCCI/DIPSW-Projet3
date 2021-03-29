@@ -21,6 +21,32 @@ class EventController extends AbstractController
         ]);
     }
 
+    public function create(Request $request)
+    {
+        $entityManager=$this->getDoctrine()->getManager();
+        $connection=$this->getDoctrine()->getConnection();
+        $values= array();
+        parse_str($request->request->get('data'),$values);
+        //dd($values);
+        $connection->beginTransaction();
+        try{
+            $event= new EventZurvan();
+            $event->setTitle($values['title']);
+            $event->setDescription($values['description']);
+            $event->setBeginAt(new \DateTime($values['dateBegin'].' '.$values['timeBegin'].':00'));
+            $event->setEndAt(new \DateTime($values['dateEnd'].' '.$values['timeEnd'].':00'));
+            $event->setBackColor($values['colorback']);
+            $event->setTextColor($values['colorfont']);
+            $entityManager->persist($event);
+            $entityManager->flush();
+            $connection->commit();
+        } catch (\Exception $e){
+            $connection->rollback();
+            throw $e;
+        }
+
+        return new Response("ok");
+    }
 
     public function new(Request $request)
     {
@@ -95,6 +121,7 @@ class EventController extends AbstractController
         else {
             $user = $this->getDoctrine()->getRepository(User::class)
                 ->findNonSecretInfo($id);
+            //dd($user);
             if ($user == null)
                 return $this->render('event/nocalendar.html.twig');
             // Needs authorisation page for uninvited calendars.

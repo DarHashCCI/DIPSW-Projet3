@@ -29,7 +29,7 @@ $( document ).ready(function() {
             console.log(info.event._def.publicId);
             $.ajax({
                 method: "PUT",
-                url: "event/"+info.event._def.publicId,
+                url: "../event/"+info.event._def.publicId,
                 data: {dr:info.delta},
                 success: function(){
                     console.log("élément mis à jour");
@@ -42,14 +42,42 @@ $( document ).ready(function() {
             console.log(info.event._def.publicId);
             $.ajax({
                 method: "PUT",
-                url: "event/"+info.event._def.publicId,
+                url: "../event/"+info.event._def.publicId,
                 data: {re:info.endDelta},
                 success: function(){
                     console.log("élément mis à jour");
                 }
             })
         },
+        dateClick: function(info) {
+            if(info.view.type=="dayGridMonth")
+            {
+                console.log(info);
+                $("#dateBegin").val(info.dateStr);
+                $("#newDateModal").toggle();
+            }
+            else{
+                alert('Clicked on: ' + info.dateStr);
+                alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                alert('Current view: ' + info.view.type);
+            }
+            // change the day's background color just for fun
+            //info.dayEl.style.backgroundColor = 'red';
+        },
         timeZone: 'UTC',
     });
     calendar.render();
+
+    $("#newDateButton").on("click",function(){
+        console.log($("#newDateForm").serialize());
+            $.ajax({
+            method: "POST",
+            url: "../event/create",
+            data: {data:$("#newDateForm").serialize()},
+            success: function(){
+                $("#newDateModal").toggle();
+                calendar.render();
+            }
+        })
+    })
 });

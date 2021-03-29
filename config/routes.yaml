@@ -42,6 +42,11 @@ contact_update:
   controller: App\Controller\ContactsController::update
 
 #event CRUD
+event_create:
+  methods: POST
+  path: /event/create
+  controller: App\Controller\EventController::create
+
 event_delete:
   methods: DELETE
   path: /event/{id}
