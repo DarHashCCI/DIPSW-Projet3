@@ -11,7 +11,7 @@ index:
 #calendar
 calendar:
   methods: GET
-  path: /calendar
+  path: /calendar/{id}
   locale: fr
   controller: App\Controller\EventController::calendar
 

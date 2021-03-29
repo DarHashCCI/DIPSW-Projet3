@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\EventZurvan;
+use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EventZurvanRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class EventController extends AbstractController
 {
@@ -83,9 +86,23 @@ class EventController extends AbstractController
         return $this->redirectToRoute('event_index');
     }
 
-    public function calendar(): Response
+    public function calendar($id): Response
     {
-        return $this->render('event/calendar.html.twig');
+        $session = new Session();
+        if($session->get('_security.last_username')==null){
+            return $this->redirectToRoute('app_login');
+        }
+        else {
+            $user = $this->getDoctrine()->getRepository(User::class)
+                ->findNonSecretInfo($id);
+            if ($user == null)
+                return $this->render('event/nocalendar.html.twig');
+            // Needs authorisation page for uninvited calendars.
+            $filesystem = new Filesystem();
+            return $this->render('event/calendar.html.twig', [
+                'id' => $id,
+            ]);
+        }
     }
 
     public function update(Request $request,$id)
