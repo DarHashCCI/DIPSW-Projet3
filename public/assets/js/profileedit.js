@@ -115,22 +115,26 @@ $( document ).ready(function() {
 
     $("body").on("change","#fileinput",function(){
         console.log($("#fileinput").val());
-        var formData = new FormData();
-        var blob = $('input[type=file]')[0].files[0];
-        formData.append('newava', blob);
-        console.log(formData);
-        $.ajax({
-            method: "POST",
-            url: reredirUrl,
-            contentType: false, // requires jQuery 1.6+
-            processData: false, // required
-            cache: false,
-            data: formData,
-            success: function(){
-                console.log("élément mis à jour");
-                d = new Date();
-                $("#ava").attr("src","../uploads/ava/"+realId+".png?"+d.getTime());
-            }
-        })
+        var ext = $("#fileinput").val().substring($("#fileinput").val().lastIndexOf('.')+1, $("#fileinput").val().length);
+        if (ext!= 'jpg' && ext!='png'){
+            alert('Votre avatar doit être un jpg ou un png !');
+        }
+        else{
+            var formData = new FormData();
+            formData.append('newava', $('input[type=file]')[0].files[0]);
+            $.ajax({
+                method: "POST",
+                url: reredirUrl,
+                contentType: false, // requires jQuery 1.6+
+                processData: false, // required
+                cache: false,
+                data: formData,
+                success: function(){
+                    console.log("élément mis à jour");
+                    d = new Date();
+                    $("#ava").attr("src","../uploads/ava/"+realId+".png?"+d.getTime());
+                }
+            })
+        }
     });
 });
