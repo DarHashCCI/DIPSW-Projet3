@@ -40,7 +40,7 @@ class EventZurvan
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $backColor="red";
+    private $backColor="#FF0000";
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -64,13 +64,6 @@ class EventZurvan
         return $this;
     }
 
-    public function setBeginAt2(string $beginAt): self
-    {
-        $this->beginAt = new \DateTime($beginAt);
-
-        return $this;
-    }
-
     public function getEndAt(): ?\DateTimeInterface
     {
         return $this->endAt;
@@ -79,13 +72,6 @@ class EventZurvan
     public function setEndAt(?\DateTimeInterface $endAt): self
     {
         $this->endAt = $endAt;
-
-        return $this;
-    }
-
-    public function setEndAt2(string $endAt): self
-    {
-        $this->endAt = new \DateTime($endAt);
 
         return $this;
     }

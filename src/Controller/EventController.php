@@ -104,12 +104,12 @@ class EventController extends AbstractController
             $ba->modify(($dr['months']).' month');
             $ba->modify(($dr['days']).' day');
             $ba->modify(($dr['milliseconds']/60000).' minutes');
-            $event->setBeginAt2($ba->format('Y-m-d H:i:s'));
+            $event->setBeginAt(new \DateTime($ba->format('Y-m-d H:i:s')));
             $ea->modify(($dr['years']).' year');
             $ea->modify(($dr['months']).' month');
             $ea->modify(($dr['days']).' day');
             $ea->modify(($dr['milliseconds']/60000).' minutes');
-            $event->setEndAt2($ea->format('Y-m-d H:i:s'));
+            $event->setEndAt(new \DateTime($ea->format('Y-m-d H:i:s')));
         }
         // Event resize
         if($re=$request->request->get('re')){
@@ -119,7 +119,7 @@ class EventController extends AbstractController
             $ea->modify(($re['months']).' month');
             $ea->modify(($re['days']).' day');
             $ea->modify(($re['milliseconds']/60000).' minutes');
-            $event->setEndAt2($ea->format('Y-m-d H:i:s'));
+            $event->setEndAt(new \DateTime($ea->format('Y-m-d H:i:s')));
         }
         $entityManager->flush();
         return new Response("ok");
