@@ -2,16 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Event;
+use App\Entity\EventZurvan;
 use App\Form\EventType;
-use App\Repository\EventRepository;
+use App\Repository\EventZurvanRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class EventController extends AbstractController
 {
-    public function index(EventRepository $eventRepository)
+    public function index(EventZurvanRepository $eventRepository)
     {
         return $this->render('event/index.html.twig', [
             'events' => $eventRepository->findAll(),
@@ -21,7 +21,7 @@ class EventController extends AbstractController
 
     public function new(Request $request)
     {
-        $event = new Event();
+        $event = new EventZurvan();
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
@@ -39,7 +39,7 @@ class EventController extends AbstractController
         ]);
     }
 
-    public function show(Event $event): Response
+    public function show(EventZurvan $event): Response
     {
         return $this->render('event/show.html.twig', [
             'event' => $event,
@@ -55,7 +55,7 @@ class EventController extends AbstractController
         ]);
     }*/
 
-      public function edit(Request $request, Event $event): Response
+      public function edit(Request $request, EventZurvan $event): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
@@ -72,7 +72,7 @@ class EventController extends AbstractController
         ]);
     }
 
-    public function delete(Request $request, Event $event): Response
+    public function delete(Request $request, EventZurvan $event): Response
     {
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -91,7 +91,7 @@ class EventController extends AbstractController
     public function update(Request $request,$id)
     {
         $entityManager=$this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $repository = $this->getDoctrine()->getRepository(EventZurvan::class);
         $event=$repository->find($id);
         if(!$event){
             throw $this->createNotFoundException("Évènement introuvable");
@@ -111,8 +111,9 @@ class EventController extends AbstractController
             $ea->modify(($dr['milliseconds']/60000).' minutes');
             $event->setEndAt($ea);
         }
-        $entityManager->persist($event);
         $entityManager->flush();
+        $event=$repository->find($id);
+        dd($event);
         return new Response("ok");
     }
 }

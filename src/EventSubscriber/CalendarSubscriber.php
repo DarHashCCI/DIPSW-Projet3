@@ -2,7 +2,7 @@
 
 namespace App\EventSubscriber;
 
-use App\Repository\EventRepository;
+use App\Repository\EventZurvanRepository;
 use CalendarBundle\CalendarEvents;
 use CalendarBundle\Entity\Event;
 use CalendarBundle\Event\CalendarEvent;
@@ -15,7 +15,7 @@ class CalendarSubscriber implements EventSubscriberInterface
     private $router;
 
     public function __construct(
-        EventRepository $eventRepository,
+        EventZurvanRepository $eventRepository,
         UrlGeneratorInterface $router
     ) {
         $this->eventRepository = $eventRepository;

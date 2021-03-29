@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Event;
+use App\Entity\EventZurvan;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +22,7 @@ class EventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Event::class,
+            'data_class' => EventZurvan::class,
         ]);
     }
 }
