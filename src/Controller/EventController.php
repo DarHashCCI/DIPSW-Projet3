@@ -110,10 +110,19 @@ class EventController extends AbstractController
             $ea->modify(($dr['days']).' day');
             $ea->modify(($dr['milliseconds']/60000).' minutes');
             $event->setEndAt($ea);
+            $event->setTitle("Yolo");
+        }
+        // Event resize
+        if($re=$request->request->get('re')){
+            $ea=$event->getEndAt();
+            $ea->modify(($re['years']).' year');
+            $ea->modify(($re['months']).' month');
+            $ea->modify(($re['days']).' day');
+            $ea->modify(($re['milliseconds']/60000).' minutes');
+            $event->setEndAt($ea);
+            $event->setTitle("Swaggins");
         }
         $entityManager->flush();
-        $event=$repository->find($id);
-        dd($event);
         return new Response("ok");
     }
 }

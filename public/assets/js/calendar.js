@@ -23,6 +23,7 @@ $( document ).ready(function() {
             right: 'dayGridMonth,timeGridWeek,timeGridDay',
         }, // https://fullcalendar.io/docs/plugin-index
         eventDrop: (info) =>{
+            console.log(info);
             console.log(info.delta);
             console.log(info.event._def.publicId);
             $.ajax({
@@ -35,25 +36,19 @@ $( document ).ready(function() {
             })
         },
         eventResize: (info) =>{
+            console.log(info);
             console.log(info.endDelta);
+            console.log(info.event._def.publicId);
+            $.ajax({
+                method: "PUT",
+                url: "event/"+info.event._def.publicId,
+                data: {re:info.endDelta},
+                success: function(){
+                    console.log("élément mis à jour");
+                }
+            })
         },
         timeZone: 'UTC',
     });
     calendar.render();
 });
-
-/*$('#calendar-holder').fullCalendar({
-        eventDrop: (info) =>{
-            console.log(info.delta);
-            console.log(info.event._def.publicId);
-            $.ajax({
-                method: "PUT",
-                url: "event/"+info.event._def.publicId,
-                data: {dr:info.delta},
-                success: function(){
-                    console.log("élément mis à jour");
-                }
-            })
-        }
-    });
-});*/
