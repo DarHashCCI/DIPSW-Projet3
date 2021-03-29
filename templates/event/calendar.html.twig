@@ -1,5 +1,4 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'zurwan.base.html.twig' %}
 {% block body %}
     <a href="{{ path('event_new') }}">Create new booking</a>
 
@@ -13,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">-->
 {% endblock %}
 
-{% block javascripts %}
+{% block scriptend %}
     <script src='{{ asset('assets/js/fullcalendar/main.js') }}'></script>
     <script src='{{ asset('assets/js/fullcalendar/fr.js') }}'></script>
     <!--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
@@ -23,33 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/locales/fr.js"></script>-->
 
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-            var calendarEl = document.getElementById('calendar-holder');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                locale: 'fr',
-                initialView: 'dayGridMonth',
-                editable: true,
-                eventSources: [
-                    {
-                        url: "{{ path('fc_load_events') }}",
-                        method: "POST",
-                        extraParams: {
-                            filters: JSON.stringify({})
-                        },
-                        failure: () => {
-                            // alert("There was an error while fetching FullCalendar!");
-                        },
-                    },
-                ],
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
-                }, // https://fullcalendar.io/docs/plugin-index
-                timeZone: 'UTC',
-            });
-            calendar.render();
-        });
+        var urf="{{ path('fc_load_events') }}";
     </script>
+<script src="{{ asset('assets/js/calendar.js') }}"></script>
 {% endblock %}

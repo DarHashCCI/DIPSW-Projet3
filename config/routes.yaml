@@ -67,6 +67,11 @@ event_show:
  path: /event/{id}
  controller: App\Controller\EventController::show
 
+event_update:
+  methods: PUT
+  path: /event/{id}
+  controller: App\Controller\EventController::update
+
 #register
 register_success:
   methods: GET

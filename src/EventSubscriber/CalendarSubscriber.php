@@ -62,16 +62,20 @@ class CalendarSubscriber implements EventSubscriberInterface
              */
 
             $bookingEvent->setOptions([
-                'backgroundColor' => $event->getBackColor(),
-                'borderColor' => $event->getBackColor(),
+                'color' => $event->getBackColor(),
                 'textColor' => $event->getTextColor(),
             ]);
-            $bookingEvent->addOption(
+            /*$bookingEvent->addOption(
                 'url',
                 $this->router->generate('event_show', [
                     'id' => $event->getId(),
                 ])
-            );
+            );*/
+            $bookingEvent->addOption(
+                'id',
+                $event->getId()
+                )
+            ;
 
             // finally, add the event to the CalendarEvent to fill the calendar
             $calendar->addEvent($bookingEvent);

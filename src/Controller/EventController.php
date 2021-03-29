@@ -87,4 +87,32 @@ class EventController extends AbstractController
     {
         return $this->render('event/calendar.html.twig');
     }
+
+    public function update(Request $request,$id)
+    {
+        $entityManager=$this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $event=$repository->find($id);
+        if(!$event){
+            throw $this->createNotFoundException("Évènement introuvable");
+        }
+        // Event drop
+        if($dr=$request->request->get('dr')){
+            $ba=$event->getBeginAt();
+            $ea=$event->getEndAt();
+            $ba->modify(($dr['years']).' year');
+            $ba->modify(($dr['months']).' month');
+            $ba->modify(($dr['days']).' day');
+            $ba->modify(($dr['milliseconds']/60000).' minutes');
+            $event->setBeginAt($ba);
+            $ea->modify(($dr['years']).' year');
+            $ea->modify(($dr['months']).' month');
+            $ea->modify(($dr['days']).' day');
+            $ea->modify(($dr['milliseconds']/60000).' minutes');
+            $event->setEndAt($ea);
+        }
+        $entityManager->persist($event);
+        $entityManager->flush();
+        return new Response("ok");
+    }
 }
