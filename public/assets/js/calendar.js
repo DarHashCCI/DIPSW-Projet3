@@ -50,17 +50,28 @@ $( document ).ready(function() {
             })
         },
         dateClick: function(info) {
-            if(info.view.type=="dayGridMonth")
-            {
-                console.log(info);
+            //Month view
+            if(info.view.type=="dayGridMonth") {
                 $("#dateBegin").val(info.dateStr);
                 $("#newDateModal").toggle();
             }
-            else{
-                alert('Clicked on: ' + info.dateStr);
-                alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-                alert('Current view: ' + info.view.type);
+            // Week view
+            else if (info.view.type=="timeGridWeek"){
+                date=info.dateStr.split('T');
+                $("#dateBegin").val(date[0]);
+                $("#timeBegin").val(date[1].substring(0, 5));
+                $("#newDateModal").toggle();
             }
+            else if (info.view.type=="timeGridDay"){
+                date=info.dateStr.split('T');
+                $("#dateBegin").val(date[0]);
+                $("#dateEnd").val(date[0]);
+                $("#timeBegin").val(date[1].substring(0, 5));
+                $("#newDateModal").toggle();
+            }
+            /*alert('Clicked on: ' + info.dateStr);
+            alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+            alert('Current view: ' + info.view.type);*/
             // change the day's background color just for fun
             //info.dayEl.style.backgroundColor = 'red';
         },
@@ -76,7 +87,7 @@ $( document ).ready(function() {
             data: {data:$("#newDateForm").serialize()},
             success: function(){
                 $("#newDateModal").toggle();
-                calendar.render();
+                calendar.refetchEvents();;
             }
         })
     })
