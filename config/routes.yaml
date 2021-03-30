@@ -67,10 +67,10 @@ event_new:
   path: /event/new
   controller: App\Controller\EventController::new
 
-event_show:
- methods: GET
+event_get:
+ methods: POST
  path: /event/{id}
- controller: App\Controller\EventController::show
+ controller: App\Controller\EventController::get
 
 event_update:
   methods: PUT

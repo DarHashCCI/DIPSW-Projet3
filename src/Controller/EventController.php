@@ -48,31 +48,13 @@ class EventController extends AbstractController
         return new Response("ok");
     }
 
-    public function new(Request $request)
+    public function get($id)
     {
-        $event = new EventZurvan();
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($event);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('event_index');
-        }
-
-        return $this->render('event/new.html.twig', [
-            'event' => $event,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    public function show(EventZurvan $event): Response
-    {
-        return $this->render('event/show.html.twig', [
-            'event' => $event,
-        ]);
+        $event = $this->getDoctrine()->getRepository(EventZurvan::class)->find($id);
+        //dd($event->getBeginAt()->format('Y-m-d H:i:s'));
+        $arr=array('id'=>$event->getId(),'beginAt'=>$event->getBeginAt()->format('Y-m-d H:i:s'),'endAt'=>$event->getEndAt()->format('Y-m-d H:i:s'),'title'=>$event->getTitle(),'description'=>$event->getDescription(),'backColor'=>$event->getBackColor(),'textColor'=>$event->getTextColor());
+        //dd(json_encode($arr));
+        return new Response(json_encode($arr));
     }
 
 

@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{{ path('event_new') }}">Create new booking</a>
 
     <div id="calendar-holder"></div>
 
@@ -46,11 +45,52 @@
         </div>
     </div>
 
-    <div id="newDateModalCreating" class="modal" tabindex="-1" role="dialog">
+    <!-- Modal for date display -->
+    <div id="displayDateModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <label for="description">Description :</label>
+                        <p name="description" id="disp_desc"></p>
+                    </div>
+                    <div class="row">
+                        <label for="dateBegin">Début :</label>
+                        <p type="date" name="dateBegin" id="disp_dateBegin"></p>
+                    </div>
+                    <div class="row">
+                        <label for="dateEnd">Fin : </label>
+                        <p type="date" name="dateEnd" id="disp_dateEnd"></p>
+                    </div>
+                    <div class="row">
+                        <label for="colorback">Couleur de fond :</label>
+                        <p type="color" name="colorback" id="disp_colorback"></p>
+                    </div>
+                    <div class="row">
+                        <label for="colorfont">Couleur de police:</label>
+                        <p type="color" name="colorfont" id="disp_colorfont"></p>
+                    </div>
+                    <input type="hidden" id="dontlookpls">
+                </div>
+                <div class="modal-footer">
+                    <button id="updateButton" type="button" class="btn btn-primary">Modifier</button>
+                    <button id="deleteButton" type="button" class="btn btn-primary">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading modal for loading/update messages -->
+    <div id="loadingModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    Création en cours...
                 </div>
             </div>
         </div>

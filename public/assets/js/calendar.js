@@ -75,6 +75,27 @@ $( document ).ready(function() {
             // change the day's background color just for fun
             //info.dayEl.style.backgroundColor = 'red';
         },
+        eventClick: function(info){
+            console.log(info.event._def.publicId);
+            $("#loadingModal .modal-body").html("Chargement...");
+            $("#loadingModal").toggle();
+            $.ajax({
+                method: "POST",
+                url: "../event/"+info.event._def.publicId,
+                success: function(data){
+                    var don=JSON.parse(data);
+                    $("#displayDateModal .modal-title").text(don.title);
+                    $("#disp_desc").text(don.description);
+                    $("#disp_dateBegin").text(don.beginAt);
+                    $("#disp_dateEnd").text(don.endAt);
+                    $("#disp_colorback").text(don.backColor);
+                    $("#disp_colorfont").text(don.textColor);
+                    $("#dontlookpls").text(don.id);
+                    $("#loadingModal").toggle();
+                    $("#displayDateModal").toggle();
+                }
+            })
+        },
         timeZone: 'UTC',
     });
     calendar.render();
@@ -124,7 +145,8 @@ $( document ).ready(function() {
         }
         if(check){
             $("#newDateModal").toggle();
-            $("#newDateModalCreating").toggle();
+            $("#loadingModal .modal-body").html("Création en cours...");
+            $("#loadingModal").toggle();
             $.ajax({
                 method: "POST",
                 url: "../event/create",
@@ -132,9 +154,21 @@ $( document ).ready(function() {
                 success: function(){
                     $("#newDateForm")[0].reset();
                     calendar.refetchEvents();
-                    $("#newDateModalCreating").toggle();
+                    $("#loadingModal").toggle();
                 }
             })
         }
     })
+
+    //Date show modal - Close button. Aka "fixing Bootstrap's shit"
+        $("#displayDateModal button.close").on("click",function(){
+            $("#displayDateModal .modal-title").text('');
+            $("#disp_desc").text('');
+            $("#disp_dateBegin").text('');
+            $("#disp_dateEnd").text('');
+            $("#disp_colorback").text('');
+            $("#disp_colorfont").text('');
+            $("#dontlookpls").text('');
+            $("#displayDateModal").toggle();
+       })
 });
