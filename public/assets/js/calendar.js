@@ -50,6 +50,8 @@ $( document ).ready(function() {
             })
         },
         dateClick: function(info) {
+            $("#newDateModal .modal-title").text('Nouvelle date');
+            $("#newDateModal .modal-footer").html('<button id="newDateButton" type="button" class="btn btn-primary">Créer</button>');
             //Month view
             if(info.view.type=="dayGridMonth") {
                 $("#dateBegin").val(info.dateStr);
@@ -192,5 +194,29 @@ $( document ).ready(function() {
                 $("#loadingModal").toggle();
             }
         })
+    })
+
+    $("#updateButton").on("click",function(){
+        dateBegin=$("#disp_dateBegin").text().split(' ');
+        dateEnd=$("#disp_dateEnd").text().split(' ');
+        $("#title").attr("placeholder",$("#displayDateModal .modal-title").text());
+        $("#desc").attr("placeholder",$("#disp_desc").text());
+        $("#dateBegin").val(dateBegin[0]);
+        $("#dateEnd").val(dateEnd[0]);
+        $("#timeBegin").val(dateBegin[1].substring(0, 5));
+        $("#timeEnd").val(dateEnd[1].substring(0, 5));
+        $("#colorback").val($("#disp_colorback").text());
+        $("#colorfont").val($("#disp_colorfont").text());
+        $("#newDateModal .modal-title").text('Éditer la date');
+        $("#newDateModal .modal-footer").html('<button id="editButton" type="button" class="btn btn-primary">Mettre à jour</button>');
+        $("#displayDateModal").toggle();
+        $("#newDateModal").toggle();
+        $("#displayDateModal .modal-title").text('');
+        $("#disp_desc").text('');
+        $("#disp_dateBegin").text('');
+        $("#disp_dateEnd").text('');
+        $("#disp_colorback").text('');
+        $("#disp_colorfont").text('');
+        $("#dontlookpls").val('');
     })
 });
