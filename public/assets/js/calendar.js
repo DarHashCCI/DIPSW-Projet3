@@ -79,6 +79,13 @@ $( document ).ready(function() {
     });
     calendar.render();
 
+    // Date creation modal - Close button. Aka "fixing Bootstrap's shit"
+    $("#newDateModal button.close").on("click",function(){
+        $("#newDateForm")[0].reset();
+        $("#newDateModal").toggle();
+    })
+
+    // Date creation modal
     $("#newDateButton").on("click",function(){
         var check=true;
         if($("#title").val().length==0){
@@ -123,8 +130,9 @@ $( document ).ready(function() {
                 url: "../event/create",
                 data: {data:$("#newDateForm").serialize()},
                 success: function(){
+                    $("#newDateForm")[0].reset();
+                    calendar.refetchEvents();
                     $("#newDateModalCreating").toggle();
-                    calendar.refetchEvents();;
                 }
             })
         }
