@@ -83,7 +83,7 @@ class EventController extends AbstractController
         ]);
     }
 
-    public function delete(Request $request, EventZurvan $event): Response
+    /*public function delete(Request $request, EventZurvan $event): Response
     {
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -92,6 +92,16 @@ class EventController extends AbstractController
         }
 
         return $this->redirectToRoute('event_index');
+    }*/
+
+    public function delete($id)
+    {
+        $entityManager= $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(EventZurvan::class);
+        $event=$repository->find($id);
+        $entityManager->remove($event);
+        $entityManager->flush();
+        return new Response("Suppression ok");
     }
 
     public function calendar($id): Response

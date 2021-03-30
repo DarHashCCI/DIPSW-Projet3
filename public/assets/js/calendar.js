@@ -90,7 +90,7 @@ $( document ).ready(function() {
                     $("#disp_dateEnd").text(don.endAt);
                     $("#disp_colorback").text(don.backColor);
                     $("#disp_colorfont").text(don.textColor);
-                    $("#dontlookpls").text(don.id);
+                    $("#dontlookpls").val(don.id);
                     $("#loadingModal").toggle();
                     $("#displayDateModal").toggle();
                 }
@@ -168,7 +168,29 @@ $( document ).ready(function() {
             $("#disp_dateEnd").text('');
             $("#disp_colorback").text('');
             $("#disp_colorfont").text('');
-            $("#dontlookpls").text('');
+            $("#dontlookpls").val('');
             $("#displayDateModal").toggle();
        })
+
+    // Date deletion button
+    $("#deleteButton").on("click",function(){
+        $("#displayDateModal").toggle();
+        $("#loadingModal .modal-body").html("Suppression en cours...");
+        $("#loadingModal").toggle();
+        $.ajax({
+            method: "DELETE",
+            url: "../event/"+$("#dontlookpls").val(),
+            success: function(){
+                $("#displayDateModal .modal-title").text('');
+                $("#disp_desc").text('');
+                $("#disp_dateBegin").text('');
+                $("#disp_dateEnd").text('');
+                $("#disp_colorback").text('');
+                $("#disp_colorfont").text('');
+                $("#dontlookpls").val('');
+                calendar.refetchEvents();
+                $("#loadingModal").toggle();
+            }
+        })
+    })
 });
