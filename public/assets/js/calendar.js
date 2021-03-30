@@ -109,7 +109,7 @@ $( document ).ready(function() {
     })
 
     // Date creation modal
-    $("#newDateButton").on("click",function(){
+    $("body").on("click","#newDateButton",function(){
         var check=true;
         if($("#title").val().length==0){
             alert("Veuillez rajouter un titre.");
@@ -209,6 +209,7 @@ $( document ).ready(function() {
         $("#colorfont").val($("#disp_colorfont").text());
         $("#newDateModal .modal-title").text('Éditer la date');
         $("#newDateModal .modal-footer").html('<button id="editButton" type="button" class="btn btn-primary">Mettre à jour</button>');
+        $("#plsno").val($("#dontlookpls").val());
         $("#displayDateModal").toggle();
         $("#newDateModal").toggle();
         $("#displayDateModal .modal-title").text('');
@@ -218,5 +219,50 @@ $( document ).ready(function() {
         $("#disp_colorback").text('');
         $("#disp_colorfont").text('');
         $("#dontlookpls").val('');
+    })
+
+    $("body").on("click","#editButton",function(){
+        var check=true;
+        if($("#dateBegin").val().length==0){
+            alert("Veuillez renseigner une date de début.");
+            check=false;
+        }
+        if($("#timeBegin").val().length==0){
+            alert("Veuillez renseigner une heure de début.");
+            check=false;
+        }
+        if($("#dateEnd").val().length==0){
+            alert("Veuillez renseigner une date de fin.");
+            check=false;
+        }
+        if($("#timeEnd").val().length==0){
+            alert("Veuillez renseigner une heure de fin.");
+            check=false;
+        }
+        if(check){
+            if(new Date($("#dateBegin").val()+' '+$("#timeBegin").val())>=new Date($("#dateEnd").val()+' '+$("#timeEnd").val())){
+                alert("La date de fin ne peut être inféreure à la date de début, voyons !");
+                check=false;
+            }
+        }
+        if($("#colorback").val()==$("#colorfont").val()){
+            alert("Les couleurs sont pareilles. Veuillez changer au moins une des 2 couleurs.");
+            check=false;
+        }
+        if(check){
+            $("#newDateModal").toggle();
+            $("#loadingModal .modal-body").html("Mise à jour en cours...");
+            $("#loadingModal").toggle();
+            $.ajax({
+                method: "PUT",
+                url: "../event/"+$("#plsno").val(),
+                data: {upd:$("#newDateForm").serialize()},
+                success: function(){
+                    $("#newDateForm")[0].reset();
+                    calendar.refetchEvents();
+                    $("#loadingModal").toggle();
+                }
+            })
+        }
     })
 });

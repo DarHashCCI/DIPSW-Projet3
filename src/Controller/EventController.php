@@ -157,6 +157,21 @@ class EventController extends AbstractController
             $ea->modify(($re['milliseconds']/60000).' minutes');
             $event->setEndAt(new \DateTime($ea->format('Y-m-d H:i:s')));
         }
+        // Event update
+        if($upd=$request->request->get('upd')){
+            $values= array();
+            parse_str($upd,$values);
+            //dd($values);
+            if($values['title'])
+                $event->setTitle($values['title']);
+            if($values['description'])
+                $event->setDescription($values['description']);
+            $event->setBeginAt(new \DateTime($values['dateBegin'].' '.$values['timeBegin'].':00'));
+            $event->setEndAt(new \DateTime($values['dateEnd'].' '.$values['timeEnd'].':00'));
+            $event->setBackColor($values['colorback']);
+            $event->setTextColor($values['colorfont']);
+
+        }
         $entityManager->flush();
         return new Response("ok");
     }
