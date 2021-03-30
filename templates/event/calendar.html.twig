@@ -11,6 +11,7 @@
     <a href="{{ path('event_new') }}">Create new booking</a>
 
     <div id="calendar-holder"></div>
+
     <div id="newDateModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -23,7 +24,7 @@
                 <div class="modal-body">
                     <form id="newDateForm">
                         <label for="title">Titre :</label>
-                        <input type="text" name="title"><br>
+                        <input type="text" name="title" id="title"><br>
                         <label for="description">Description :</label>
                         <textarea name="description" id="desc" cols="30" rows="10"></textarea><br>
                         <label for="dateBegin">Début :</label>
@@ -33,13 +34,23 @@
                         <input type="date" name="dateEnd" id="dateEnd">
                         <input type="time" name="timeEnd" id="timeEnd"><br>
                         <label for="colorback">Couleur de fond :</label>
-                        <input type="color" name="colorback"><br>
+                        <input type="color" name="colorback" id="colorback"><br>
                         <label for="colorfont">Couleur de police:</label>
-                        <input type="color" name="colorfont"><br>
+                        <input type="color" name="colorfont" id="colorfont"><br>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button id="newDateButton" type="button" class="btn btn-primary">Créer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="newDateModalCreating" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Création en cours...
                 </div>
             </div>
         </div>

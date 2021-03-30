@@ -80,15 +80,53 @@ $( document ).ready(function() {
     calendar.render();
 
     $("#newDateButton").on("click",function(){
-        console.log($("#newDateForm").serialize());
-            $.ajax({
-            method: "POST",
-            url: "../event/create",
-            data: {data:$("#newDateForm").serialize()},
-            success: function(){
-                $("#newDateModal").toggle();
-                calendar.refetchEvents();;
+        var check=true;
+        if($("#title").val().length==0){
+            alert("Veuillez rajouter un titre.");
+            check=false;
+        }
+        if($("#desc").val().length==0){
+            alert("Votre description ne peut être vide.");
+            check=false;
+        }
+        if($("#dateBegin").val().length==0){
+            alert("Veuillez renseigner une date de début.");
+            check=false;
+        }
+        if($("#timeBegin").val().length==0){
+            alert("Veuillez renseigner une heure de début.");
+            check=false;
+        }
+        if($("#dateEnd").val().length==0){
+            alert("Veuillez renseigner une date de fin.");
+            check=false;
+        }
+        if($("#timeEnd").val().length==0){
+            alert("Veuillez renseigner une heure de fin.");
+            check=false;
+        }
+        if(check){
+            if(new Date($("#dateBegin").val()+' '+$("#timeBegin").val())>=new Date($("#dateEnd").val()+' '+$("#timeEnd").val())){
+                alert("La date de fin ne peut être inféreure à la date de début, voyons !");
+                check=false;
             }
-        })
+        }
+        if($("#colorback").val()==$("#colorfont").val()){
+            alert("Les couleurs sont pareilles. Veuillez changer au moins une des 2 couleurs.");
+            check=false;
+        }
+        if(check){
+            $("#newDateModal").toggle();
+            $("#newDateModalCreating").toggle();
+            $.ajax({
+                method: "POST",
+                url: "../event/create",
+                data: {data:$("#newDateForm").serialize()},
+                success: function(){
+                    $("#newDateModalCreating").toggle();
+                    calendar.refetchEvents();;
+                }
+            })
+        }
     })
 });
