@@ -52,20 +52,11 @@ event_delete:
   path: /event/{id}
   controller: App\Controller\EventController::delete
 
-event_edit:
-  methods: GET|POST
-  path: /event/{id}/edit
-  controller: App\Controller\EventController::edit
-
 event_index:
   methods: GET
   path: /event
   controller: App\Controller\EventController::index
 
-event_new:
-  methods: GET|POST
-  path: /event/new
-  controller: App\Controller\EventController::new
 
 event_get:
  methods: POST

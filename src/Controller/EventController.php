@@ -58,42 +58,6 @@ class EventController extends AbstractController
     }
 
 
-    /*
-      public function show(Event $event): Response
-    {
-        return $this->render('event/show.html.twig', [
-            'event' => $event,
-        ]);
-    }*/
-
-      public function edit(Request $request, EventZurvan $event): Response
-    {
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('event_index');
-        }
-
-        return $this->render('event/edit.html.twig', [
-            'event' => $event,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /*public function delete(Request $request, EventZurvan $event): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($event);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('event_index');
-    }*/
-
     public function delete($id)
     {
         $entityManager= $this->getDoctrine()->getManager();
@@ -170,7 +134,6 @@ class EventController extends AbstractController
             $event->setEndAt(new \DateTime($values['dateEnd'].' '.$values['timeEnd'].':00'));
             $event->setBackColor($values['colorback']);
             $event->setTextColor($values['colorfont']);
-
         }
         $entityManager->flush();
         return new Response("ok");
