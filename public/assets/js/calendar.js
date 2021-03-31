@@ -151,7 +151,7 @@ $( document ).ready(function() {
             $("#loadingModal").toggle();
             $.ajax({
                 method: "POST",
-                url: "../event/create",
+                url: "../event/create/"+realId,
                 data: {data:$("#newDateForm").serialize()},
                 success: function(){
                     $("#newDateForm")[0].reset();

@@ -33,7 +33,7 @@ contact_new:
 
 contact_create:
   methods: POST
-  path: /contact/create
+  path: /contact/create/{$id}
   controller: App\Controller\ContactsController::create
 
 contact_update:
@@ -44,7 +44,7 @@ contact_update:
 #event CRUD
 event_create:
   methods: POST
-  path: /event/create
+  path: /event/create/{id}
   controller: App\Controller\EventController::create
 
 event_delete:

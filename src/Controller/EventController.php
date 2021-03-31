@@ -21,7 +21,7 @@ class EventController extends AbstractController
         ]);
     }
 
-    public function create(Request $request)
+    public function create(Request $request,$id)
     {
         $entityManager=$this->getDoctrine()->getManager();
         $connection=$this->getDoctrine()->getConnection();
@@ -37,6 +37,8 @@ class EventController extends AbstractController
             $event->setEndAt(new \DateTime($values['dateEnd'].' '.$values['timeEnd'].':00'));
             $event->setBackColor($values['colorback']);
             $event->setTextColor($values['colorfont']);
+            $event->addInvite($this->getDoctrine()->getRepository(User::class)
+                ->find($id));
             $entityManager->persist($event);
             $entityManager->flush();
             $connection->commit();

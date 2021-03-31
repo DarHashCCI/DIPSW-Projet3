@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventZurvanRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class EventZurvan
      * @ORM\Column(type="string", length=255)
      */
     private $textColor="white";
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="events")
+     */
+    private $invites;
+
+    public function __construct()
+    {
+        $this->invites = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,33 @@ class EventZurvan
     public function setTextColor(string $textColor): self
     {
         $this->textColor = $textColor;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getInvites(): Collection
+    {
+        return $this->invites;
+    }
+
+    public function addInvite(User $invite): self
+    {
+        if (!$this->invites->contains($invite)) {
+            $this->invites[] = $invite;
+            $invite->addEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvite(User $invite): self
+    {
+        if ($this->invites->removeElement($invite)) {
+            $invite->removeEvent($this);
+        }
 
         return $this;
     }
