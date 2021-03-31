@@ -68,9 +68,15 @@ class User implements UserInterface
      */
     private $events;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class)
+     */
+    private $invitedUsers;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->invitedUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,6 +240,30 @@ class User implements UserInterface
     public function removeEvent(EventZurvan $event): self
     {
         $this->events->removeElement($event);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getInvitedUsers(): Collection
+    {
+        return $this->invitedUsers;
+    }
+
+    public function addInvitedUser(self $invitedUser): self
+    {
+        if (!$this->invitedUsers->contains($invitedUser)) {
+            $this->invitedUsers[] = $invitedUser;
+        }
+
+        return $this;
+    }
+
+    public function removeInvitedUser(self $invitedUser): self
+    {
+        $this->invitedUsers->removeElement($invitedUser);
 
         return $this;
     }

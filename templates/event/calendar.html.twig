@@ -103,5 +103,9 @@
         var urf="{{ path('fc_load_events') }}";
         var id={{ id }};
     </script>
-<script src="{{ asset('assets/js/calendar.js') }}"></script>
+    {% if autho %}
+        <script src="{{ asset('assets/js/calendar.js') }}"></script>
+    {% else %}
+        <script src="{{ asset('assets/js/calendarrr.js') }}"></script>
+    {% endif %}
 {% endblock %}

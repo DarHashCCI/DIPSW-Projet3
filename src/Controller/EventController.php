@@ -6,6 +6,7 @@ use App\Entity\EventZurvan;
 use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EventZurvanRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,11 +83,29 @@ class EventController extends AbstractController
             //dd($user);
             if ($user == null)
                 return $this->render('event/nocalendar.html.twig');
-            // Needs authorisation page for uninvited calendars.
-            $filesystem = new Filesystem();
-            return $this->render('event/calendar.html.twig', [
-                'id' => $id,
-            ]);
+            else{
+                $ourGuy=$this->getDoctrine()->getRepository(User::class)
+                    ->findBy(['email'=>$session->get('_security.last_username')]);
+                $userCheck =$this->getDoctrine()->getRepository(User::class)
+                    ->find($id);
+
+                //If it's our calendar
+                if(($ourGuy[0]->getId()==$id))
+                    return $this->render('event/calendar.html.twig', [
+                        'id' => $id,
+                        'autho' => true,
+                    ]);
+
+                //If we're invited but not our calendar
+                if($userCheck->getInvitedUsers()->contains($ourGuy[0]))
+                    return $this->render('event/calendar.html.twig', [
+                        'id' => $id,
+                        'autho' => false,
+                    ]);
+
+                // Not our calendar, not invited
+                else return $this->render('event/calendardenied.html.twig');
+            }
         }
     }
 
