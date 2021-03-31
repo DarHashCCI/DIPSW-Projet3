@@ -47,4 +47,18 @@ class EventZurvanRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findEventsBetweenDates($start, $end, $id)
+    {
+        return $this->createQueryBuilder('event')
+            ->join('event.invites','user')
+            ->where('event.beginAt BETWEEN :start and :end OR event.endAt BETWEEN :start and :end')
+            ->andWhere('user.id=:id')
+            ->setParameter('start', $start->format('Y-m-d H:i:s'))
+            ->setParameter('end', $end->format('Y-m-d H:i:s'))
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

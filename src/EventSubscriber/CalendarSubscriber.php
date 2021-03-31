@@ -34,17 +34,8 @@ class CalendarSubscriber implements EventSubscriberInterface
         $start = $calendar->getStart();
         $end = $calendar->getEnd();
         $filters = $calendar->getFilters();
-
-        // Modify the query to fit to your entity and needs
-        // Change booking.beginAt by your start date property
         $events = $this->eventRepository
-            ->createQueryBuilder('event')
-            ->where('event.beginAt BETWEEN :start and :end OR event.endAt BETWEEN :start and :end')
-            ->setParameter('start', $start->format('Y-m-d H:i:s'))
-            ->setParameter('end', $end->format('Y-m-d H:i:s'))
-            ->getQuery()
-            ->getResult()
-        ;
+            ->findEventsBetweenDates($start, $end, $filters['id']);
 
         foreach ($events as $event) {
             // this create the events with your data (here booking data) to fill calendar
@@ -65,12 +56,6 @@ class CalendarSubscriber implements EventSubscriberInterface
                 'color' => $event->getBackColor(),
                 'textColor' => $event->getTextColor(),
             ]);
-            /*$bookingEvent->addOption(
-                'url',
-                $this->router->generate('event_show', [
-                    'id' => $event->getId(),
-                ])
-            );*/
             $bookingEvent->addOption(
                 'id',
                 $event->getId()
