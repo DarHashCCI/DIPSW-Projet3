@@ -52,6 +52,7 @@ $( document ).ready(function() {
         dateClick: function(info) {
             $("#newDateModal .modal-title").text('Nouvelle date');
             $("#newDateModal .modal-footer").html('<button id="newDateButton" type="button" class="btn btn-primary">Créer</button>');
+            $("#colorback").val("#FFFFFF");
             //Month view
             if(info.view.type=="dayGridMonth") {
                 $("#dateBegin").val(info.dateStr);
@@ -90,9 +91,14 @@ $( document ).ready(function() {
                     $("#disp_desc").text(don.description);
                     $("#disp_dateBegin").text(don.beginAt);
                     $("#disp_dateEnd").text(don.endAt);
-                    $("#disp_colorback").text(don.backColor);
-                    $("#disp_colorfont").text(don.textColor);
                     $("#dontlookpls").val(don.id);
+                    //Coloring the display window, so it uses the event's color.
+                    $("#displayDateModal .modal-content").css('background-color',don.backColor);
+                    $("#displayDateModal .modal-content").css('color',don.textColor);
+                    $("#displayDateModal .modal-footer button").css("border-color", don.textColor);
+                    $("#displayDateModal .modal-footer button").css("background-color", don.textColor);
+                    $("#displayDateModal .modal-footer button").css("color", don.backColor);
+                    $("#displayDateModal .modal-header button").css("color", don.textColor);
                     $("#loadingModal").toggle();
                     $("#displayDateModal").toggle();
                 }
@@ -101,6 +107,18 @@ $( document ).ready(function() {
         timeZone: 'UTC',
     });
     calendar.render();
+
+    //RGB to hex - used for the color input that don't accept rgb values
+    function rgbToHex(r) {
+        var a = r.split("(")[1].split(")")[0];
+        a = a.split(",");
+        var b = a.map(function(x){             //For each array element
+            x = parseInt(x).toString(16);      //Convert to a base16 string
+            return (x.length==1) ? "0"+x : x;  //Add zero if we get only one character
+        })
+        b="#"+b.join("");
+        return b;
+    }
 
     // Date creation modal - Close button. Aka "fixing Bootstrap's shit"
     $("#newDateModal button.close").on("click",function(){
@@ -168,8 +186,6 @@ $( document ).ready(function() {
             $("#disp_desc").text('');
             $("#disp_dateBegin").text('');
             $("#disp_dateEnd").text('');
-            $("#disp_colorback").text('');
-            $("#disp_colorfont").text('');
             $("#dontlookpls").val('');
             $("#displayDateModal").toggle();
        })
@@ -187,8 +203,6 @@ $( document ).ready(function() {
                 $("#disp_desc").text('');
                 $("#disp_dateBegin").text('');
                 $("#disp_dateEnd").text('');
-                $("#disp_colorback").text('');
-                $("#disp_colorfont").text('');
                 $("#dontlookpls").val('');
                 calendar.refetchEvents();
                 $("#loadingModal").toggle();
@@ -196,28 +210,37 @@ $( document ).ready(function() {
         })
     })
 
+    // Update button on the display modal
     $("#updateButton").on("click",function(){
         dateBegin=$("#disp_dateBegin").text().split(' ');
         dateEnd=$("#disp_dateEnd").text().split(' ');
+        fontColor=$("#displayDateModal .modal-footer button").css("background-color");
+        backColor=$("#displayDateModal .modal-footer button").css("color");
+        // Putting the right values in their respective inpus
         $("#title").attr("placeholder",$("#displayDateModal .modal-title").text());
         $("#desc").attr("placeholder",$("#disp_desc").text());
         $("#dateBegin").val(dateBegin[0]);
         $("#dateEnd").val(dateEnd[0]);
         $("#timeBegin").val(dateBegin[1].substring(0, 5));
         $("#timeEnd").val(dateEnd[1].substring(0, 5));
-        $("#colorback").val($("#disp_colorback").text());
-        $("#colorfont").val($("#disp_colorfont").text());
+        $("#colorback").val(rgbToHex(backColor));
+        $("#colorfont").val(rgbToHex(fontColor));
         $("#newDateModal .modal-title").text('Éditer la date');
         $("#newDateModal .modal-footer").html('<button id="editButton" type="button" class="btn btn-primary">Mettre à jour</button>');
+        $("#newDateModal .modal-content").css("background-color", backColor);
+        $("#newDateModal .modal-footer button").css("color", backColor);
+        $("#newDateModal .modal-content").css("color", fontColor);
+        $("#newDateModal .modal-footer button").css("background-color", fontColor);
+        $("#newDateModal .modal-footer button").css("border-color", fontColor);
+        $("#newDateModal .modal-header button").css("color", fontColor);
         $("#plsno").val($("#dontlookpls").val());
         $("#displayDateModal").toggle();
         $("#newDateModal").toggle();
+        // Resetting the display modal
         $("#displayDateModal .modal-title").text('');
         $("#disp_desc").text('');
         $("#disp_dateBegin").text('');
         $("#disp_dateEnd").text('');
-        $("#disp_colorback").text('');
-        $("#disp_colorfont").text('');
         $("#dontlookpls").val('');
     })
 
@@ -264,5 +287,18 @@ $( document ).ready(function() {
                 }
             })
         }
+    })
+
+    // Date creation/update modal : color inputs behavior check
+    $("#colorback").on("change",function(){
+        $("#newDateModal .modal-content").css("background-color", $("#colorback").val());
+        $("#newDateModal .modal-footer button").css("color", $("#colorback").val());
+    })
+
+    $("#colorfont").on("change",function(){
+        $("#newDateModal .modal-content").css("color", $("#colorfont").val());
+        $("#newDateModal .modal-footer button").css("background-color", $("#colorfont").val());
+        $("#newDateModal .modal-footer button").css("border-color", $("#colorfont").val());
+        $("#newDateModal .modal-header button").css("color", $("#colorfont").val());
     })
 });

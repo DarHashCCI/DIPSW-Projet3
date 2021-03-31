@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link href='{{ asset('assets/css/fullcalendar/main.css') }}' rel='stylesheet' />
+    <link href='{{ asset('assets/css/calendar.css') }}' rel='stylesheet' />
     <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">-->
@@ -67,14 +68,6 @@
                     <div class="row">
                         <label for="dateEnd">Fin : </label>
                         <p type="date" name="dateEnd" id="disp_dateEnd"></p>
-                    </div>
-                    <div class="row">
-                        <label for="colorback">Couleur de fond :</label>
-                        <p type="color" name="colorback" id="disp_colorback"></p>
-                    </div>
-                    <div class="row">
-                        <label for="colorfont">Couleur de police:</label>
-                        <p type="color" name="colorfont" id="disp_colorfont"></p>
                     </div>
                     <input type="hidden" id="dontlookpls">
                 </div>
