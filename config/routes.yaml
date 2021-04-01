@@ -69,10 +69,10 @@ event_update:
   controller: App\Controller\EventController::update
 
 #mails
-mail_invite_request:
+mail_calendar_request:
   methods: POST
-  path: /mail/invite_request
-  controller: App\Controller\TestMailController::inviteRequest
+  path: /mail/calendar_request
+  controller: App\Controller\TestMailController::profileCalendarRequests
 
 
 #register

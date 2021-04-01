@@ -39,18 +39,43 @@ class TestMailController extends AbstractController
         return $this->redirectToRoute('login_index');
     }
 
-    public function inviteRequest(Request $request, \Swift_Mailer $mailer,
+    //  Profile : calendar request handler
+    //  Mode values:
+    //      1 : invite request
+    //      2 : granting access
+    //      3 : removing access
+    public function profileCalendarRequests(Request $request, \Swift_Mailer $mailer,
                                   LoggerInterface $logger)
     {
-        $message = new \Swift_Message('Zurvan - demande de consultation du calendrier');
+        $sender=$this->getDoctrine()->getRepository(User::class)
+            ->find($request->request->get('idSender'));
+        $dest=$this->getDoctrine()->getRepository(User::class)
+            ->find($request->request->get('idDest'));
+        $entityManager=$this->getDoctrine()->getManager();
+        switch($request->request->get('mode')){
+            case 1 :
+                $title='Zurvan - demande de consultation du calendrier';
+                $view='emails/cal_inviterequest.html.twig';
+                break;
+            case 2 :
+                $title='Zurvan - accès autorisé pour un calendrier';
+                $view='emails/cal_accessgranted.html.twig';
+                $sender->addInvitedUser($dest);
+                break;
+            case 3 :
+                $title='Zurvan - accès refuté pour un calendrier';
+                $view='emails/cal_accessremoved.html.twig';
+                $sender->removeInvitedUser($dest);
+                break;
+        }
+        $entityManager->flush();
+        $message = new \Swift_Message($title);
         $message->setFrom('zurwan.cheetahcorp@gmail.com');
-        $message->setTo($this->getDoctrine()->getRepository(User::class)
-            ->find($request->request->get('idDest'))->getEmail());
+        $message->setTo($dest->getEmail());
         $message->setBody(
             $this->renderView(
-                'emails/inviterequest.html.twig',
-                ['user' => $this->getDoctrine()->getRepository(User::class)
-                    ->find($request->request->get('idSender'))]
+                $view,
+                ['user' => $sender]
             ),
             'text/html'
         );
