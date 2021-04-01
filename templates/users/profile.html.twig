@@ -51,10 +51,12 @@
 </div>
 {% endblock %}
 {% block scriptend %}
+    <script>var id={{user.id}}; </script>
     {% if app.user.id == user.id %}
-        <script>var id={{user.id}}; </script>
         <script>
             var redirUrl="{{ path('users_update',{id:user.id}) }}";</script>
-        <script src="{{ asset('assets/js/profileedit.js') }}"></script>
+        <script src="{{ asset('assets/js/profile/profileedit.js') }}"></script>
+    {% else %}
+        <script src="{{ asset('assets/js/profile/profilerequests.js') }}"></script>
     {% endif %}
 {% endblock %}
