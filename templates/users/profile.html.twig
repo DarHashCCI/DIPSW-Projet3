@@ -39,12 +39,12 @@
         {% if isInvited %}
             <a href="{{ path('calendar',{id:user.id}) }}"><button>Calendrier</button></a>
         {% else %}
-            <button>Demander l'accès au calendrier</button>
+            <button id="requestInvite">Demander l'accès au calendrier</button>
         {% endif %}
         {% if hasInvited %}
-            <button>Retirer l'accès au calendrier</button>
+            <button id="denyAccess">Retirer l'accès au calendrier</button>
         {% else %}
-            <button>Donner l'accès au calendrier</button>
+            <button id="allowAccess">Donner l'accès au calendrier</button>
         {% endif %}
     </div>
     {% endif %}
@@ -57,6 +57,7 @@
             var redirUrl="{{ path('users_update',{id:user.id}) }}";</script>
         <script src="{{ asset('assets/js/profile/profileedit.js') }}"></script>
     {% else %}
+        <script>var ourId={{app.user.id}}; </script>
         <script src="{{ asset('assets/js/profile/profilerequests.js') }}"></script>
     {% endif %}
 {% endblock %}

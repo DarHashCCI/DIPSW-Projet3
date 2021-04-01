@@ -68,6 +68,13 @@ event_update:
   path: /event/{id}
   controller: App\Controller\EventController::update
 
+#mails
+mail_invite_request:
+  methods: POST
+  path: /mail/invite_request
+  controller: App\Controller\TestMailController::inviteRequest
+
+
 #register
 register_success:
   methods: GET

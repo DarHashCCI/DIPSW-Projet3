@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,5 +37,27 @@ class TestMailController extends AbstractController
         $this->addFlash('notice', 'Email sent');
 
         return $this->redirectToRoute('login_index');
+    }
+
+    public function inviteRequest(Request $request, \Swift_Mailer $mailer,
+                                  LoggerInterface $logger)
+    {
+        $message = new \Swift_Message('Zurvan - demande de consultation du calendrier');
+        $message->setFrom('zurwan.cheetahcorp@gmail.com');
+        $message->setTo($this->getDoctrine()->getRepository(User::class)
+            ->find($request->request->get('idDest'))->getEmail());
+        $message->setBody(
+            $this->renderView(
+                'emails/inviterequest.html.twig',
+                ['user' => $this->getDoctrine()->getRepository(User::class)
+                    ->find($request->request->get('idSender'))]
+            ),
+            'text/html'
+        );
+
+        $mailer->send($message);
+
+        $logger->info('email sent');
+        return new Response('ok');
     }
 }
