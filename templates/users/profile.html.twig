@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
     <div class="row">
         <div class="col">
         {% if ava %}
@@ -22,7 +23,7 @@
         <div class="col">
             <div><strong>Email :</strong> {{ app.user.email }}</div>
             <div><strong>Nom :</strong> <div {% if user.last_name %}id="lastname" >{{ user.last_name }}{% else %} id="lastnameempty">(non renseigné){% endif %}</div></div>
-            <div><strong>Prénom :</strong> <div {% if user.first_name %}id="firstname" >{{ user.first_name }}{% else %} id="firstnameempty">(non renseigné){% endif %}</div>
+            <div><strong>Prénom :</strong> <div {% if user.first_name %}id="firstname" >{{ user.first_name }}{% else %} id="firstnameempty">(non renseigné){% endif %}</div></div>
             <div><strong>Sexe :</strong>
                 {% if user.sex==1 %}<div id="gender">Homme</div>
                 {% elseif user.sex==2 %}<div id="gender">Femme</div>
@@ -30,10 +31,24 @@
                 {% else %}<div id="gender">(non renseigné)</div>
                 {% endif %}
             </div>
-
             <div><strong>Bio :</strong><br><div {% if user.bio %}id="bio" >{{ user.bio }}{% else %} id="bioempty" >(non renseigné){% endif %}</div></div>
         </div>
     </div>
+    {%  if app.user.id != user.id %}
+    <div class="row">
+        {% if isInvited %}
+            <a href="{{ path('calendar',{id:user.id}) }}"><button>Calendrier</button></a>
+        {% else %}
+            <button>Demander l'accès au calendrier</button>
+        {% endif %}
+        {% if hasInvited %}
+            <button>Retirer l'accès au calendrier</button>
+        {% else %}
+            <button>Donner l'accès au calendrier</button>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
 {% block scriptend %}
     {% if app.user.id == user.id %}

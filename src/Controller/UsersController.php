@@ -62,6 +62,12 @@ class UsersController extends AbstractController
             return $this->render('users/profile.html.twig', [
                 'user' => $user,
                 'ava' => $filesystem->exists('./uploads/ava/'.$id.'.png'),
+                'isInvited' => $this->getDoctrine()->getRepository(User::class)
+                    ->find($id)->getInvitedUsers()->contains($this->getDoctrine()->getRepository(User::class)
+                        ->findBy(['email'=>$session->get('_security.last_username')])[0]),
+                "hasInvited" => $this->getDoctrine()->getRepository(User::class)
+                    ->findBy(['email'=>$session->get('_security.last_username')])[0]->getInvitedUsers()->contains($this->getDoctrine()->getRepository(User::class)
+                        ->find($id))
             ]);
         }
     }
