@@ -8,12 +8,14 @@ index:
   path: /
   controller: App\Controller\UsersController::index
 
+
 #calendar
 calendar:
   methods: GET
   path: /calendar/{id}
   locale: fr
   controller: App\Controller\EventController::calendar
+
 
 #contacts
 contact_index:
@@ -57,16 +59,21 @@ event_index:
   path: /event
   controller: App\Controller\EventController::index
 
-
 event_get:
  methods: POST
  path: /event/{id}
  controller: App\Controller\EventController::get
 
+event_get_potential_users:
+  methods: POST
+  path: /event/{id}/getlist
+  controller: App\Controller\EventController::forEventInvite
+
 event_update:
   methods: PUT
   path: /event/{id}
   controller: App\Controller\EventController::update
+
 
 #mails
 mail_calendar_request:
@@ -80,6 +87,7 @@ register_success:
   methods: GET
   path: /register/success
   controller: App\Controller\RegistrationController::success
+
 
 #Users route
 users_home:

@@ -79,7 +79,6 @@ $( document ).ready(function() {
             //info.dayEl.style.backgroundColor = 'red';
         },
         eventClick: function(info){
-            console.log(info.event._def.publicId);
             $("#loadingModal .modal-body").html("Chargement...");
             $("#loadingModal").toggle();
             $.ajax({
@@ -284,6 +283,65 @@ $( document ).ready(function() {
                     $("#newDateForm")[0].reset();
                     calendar.refetchEvents();
                     $("#loadingModal").toggle();
+                }
+            })
+        }
+    })
+
+    // Date invite button
+    $("#inviteButton").on("click",function(){
+        fontColor=$("#displayDateModal .modal-footer button").css("background-color");
+        backColor=$("#displayDateModal .modal-footer button").css("color");
+        $("#inviteDateModal .modal-content").css("background-color", backColor);
+        $("#inviteDateModal .modal-footer button").css("color", backColor);
+        $("#inviteDateModal .modal-content").css("color", fontColor);
+        $("#inviteDateModal .modal-footer button").css("background-color", fontColor);
+        $("#inviteDateModal .modal-footer button").css("border-color", fontColor);
+        $("#inviteDateModal .modal-header button").css("color", fontColor);
+        $(".loader").css("color", fontColor);
+        $("#plsffs").val($("#dontlookpls").val());
+        $("#displayDateModal").toggle();
+        $("#inviteDateModal").toggle();
+        // Resetting the display modal
+        $("#displayDateModal .modal-title").text('');
+        $("#disp_desc").text('');
+        $("#disp_dateBegin").text('');
+        $("#disp_dateEnd").text('');
+        $("#dontlookpls").val('');
+    })
+
+    //Date invite modal - Close button. Aka "fixing Bootstrap's shit"
+    $("#inviteDateModal button.close").on("click",function(){
+        $("#searchResults").html('');
+        $("#searchity").text('');
+        $("#plsffs").val('');
+        $("#inviteDateModal").toggle();
+    })
+
+    //Date invite modal - Search button.
+    $("#inviteDateModal .fa-search").on("click",function(){
+        if($("#searchity").val().length>0){
+            $(".loader").css('display','block');
+            $("#searchResults").css('display','none');
+            $("#searchResults").html('');
+            console.log($("#searchity").val());
+            $.ajax({
+                method: "POST",
+                url: "../event/"+$("#plsffs").val()+"/getlist",
+                data: {str:$("#searchity").val(),id:realId},
+                success: function(data){
+                    var don=JSON.parse(data);
+                    if(don.length==0){
+                        $("#searchResults").html("Aucun résultat trouvé");
+                    }
+                    else{
+                        don.forEach(function(user){
+                            $("#searchResults").append("<div><input type=\"checkbox\" value='"+user.id+"'>Nom : "+user.last_name+" | Prénom : "+user.first_name+"<br>Email : "+user.email+"</div>");
+                        })
+                    }
+                    $(".loader").css('display','none');
+                    console.log(don);
+                    $("#searchResults").css('display','block');
                 }
             })
         }

@@ -47,6 +47,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()->getOneOrNullResult();
     }
 
+    // Find all users having a string in parts of their name or email
+    public function findUsersByString($str,$ev,$id)
+    {
+        $entityManager=$this->getEntityManager();
+        $sql='SELECT u.id, u.email, u.first_name, u.last_name
+        FROM user u WHERE
+        (u.first_name LIKE :str OR u.last_name LIKE :str OR u.email LIKE :str
+        OR CONCAT(u.first_name," ",u.last_name) LIKE :str OR CONCAT(u.last_name," ",u.first_name) LIKE :str)
+        AND u.id!=:id AND u.id NOT IN(SELECT ez.user_id FROM user_event_zurvan ez WHERE ez.event_zurvan_id =:ez)';
+       $query=$entityManager->getConnection()->prepare($sql);
+       $query->bindValue('ez',$ev);
+       $query->bindValue('str','%'.$str.'%');
+       $query->bindValue('id',$id);
+       $query->execute();
+
+        return $query->fetchAllAssociative();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

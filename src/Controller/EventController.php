@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class EventController extends AbstractController
 {
+    // Event testing function - check all existing events
     public function index(EventZurvanRepository $eventRepository)
     {
         return $this->render('event/index.html.twig', [
@@ -22,6 +23,7 @@ class EventController extends AbstractController
         ]);
     }
 
+    // Function to create a new event
     public function create(Request $request,$id)
     {
         $entityManager=$this->getDoctrine()->getManager();
@@ -51,6 +53,7 @@ class EventController extends AbstractController
         return new Response("ok");
     }
 
+    // Function to display an event
     public function get($id)
     {
         $event = $this->getDoctrine()->getRepository(EventZurvan::class)->find($id);
@@ -60,7 +63,7 @@ class EventController extends AbstractController
         return new Response(json_encode($arr));
     }
 
-
+    // Function to delete an event
     public function delete($id)
     {
         $entityManager= $this->getDoctrine()->getManager();
@@ -71,6 +74,7 @@ class EventController extends AbstractController
         return new Response("Suppression ok");
     }
 
+    // Function to render the calendar
     public function calendar($id): Response
     {
         $session = new Session();
@@ -109,6 +113,7 @@ class EventController extends AbstractController
         }
     }
 
+    // Function to update an event
     public function update(Request $request,$id)
     {
         $entityManager=$this->getDoctrine()->getManager();
@@ -158,5 +163,19 @@ class EventController extends AbstractController
         }
         $entityManager->flush();
         return new Response("ok");
+    }
+
+    //Function to seek all users searched through the calendar for a specific event invite
+    public function forEventInvite(Request $request,$id)
+    {
+        $entityManager=$this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(EventZurvan::class);
+        $event=$repository->find($id);
+        if(!$event){
+            throw $this->createNotFoundException("Évènement introuvable");
+        }
+        $usersSearched=$this->getDoctrine()->getRepository(User::class)->findUsersByString($request->request->get('str'),$id,$request->request->get('id'));
+        return new Response(json_encode($usersSearched));
+
     }
 }

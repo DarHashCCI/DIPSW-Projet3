@@ -14,3 +14,9 @@
     border-top:none;
     justify-content: space-around;
 }
+
+#searchResults{
+    height:200px;
+    border:2px black solid;
+    overflow-y: scroll;
+}
