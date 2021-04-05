@@ -1,3 +1,16 @@
 .close{
     opacity:1;
 }
+
+.fc-license-message{
+    display: none;
+}
+
+.modal-header{
+    border-bottom:none;
+}
+
+.modal-footer{
+    border-top:none;
+    justify-content: space-around;
+}

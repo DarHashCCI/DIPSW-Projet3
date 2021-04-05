@@ -7,6 +7,7 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/zurvan.css') }}">
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
@@ -18,9 +19,12 @@
     {% if app.user %}
     <header>
         <img src="{{ asset('assets/img/logo.png') }}" alt="Logo Zurvan">
-        <div>
-            <a href="{{ path("users_profile",{id:app.user.id}) }}">Mon profil</a>
-            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        <div id="profileWidget">
+            <a href="{{ path("users_profile",{id:app.user.id}) }}"><div id="avamin"></div></a>
+            <div>
+                <p>{{ app.user.email }}</p>
+                <div id="profileWidgetButtons"><a href="{{ path('calendar',{id:app.user.id}) }}"><i class="far fa-calendar-alt"></i></a><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></div>
+            </div>
         </div>
     </header>
     {% endif %}
