@@ -2,3 +2,6 @@ Image upload : https://symfonycasts.com/screencast/symfony-uploads/upload-reques
 Change img attribute + img refresh : https://stackoverflow.com/questions/2104949/how-to-reload-refresh-an-elementimage-in-jquery
 Souci avec le DateInterval : https://www.webfx.com/blog/web-design/php-dateinterval-class/
 Fonction RGBtoHex : Nippey : https://stackoverflow.com/questions/13070054/convert-rgb-strings-to-hex-in-javascript
+File exist Twig extension : https://stackoverflow.com/questions/14231967/symfony2-checking-if-file-exists/14232207#14232207 + https://symfony.com/doc/current/templating/twig_extension.html
+Loader thing : Luke Haas : https://projects.lukehaas.me/css-loaders/
+Reset Password : ResetPasswordBundle https://github.com/symfonycasts/reset-password-bundle
