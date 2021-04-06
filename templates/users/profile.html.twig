@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-        {% if ava %}
+            {% if file_exists('./uploads/ava/' ~ user.id ~ '.png') %}
             <img id="ava" src="{{ asset('uploads/ava/'~user.id~'.png') }}" alt="Avatar de l'utilisateur">
         {% else %}
             <img id="ava" src="{{ asset('uploads/ava/0.png') }}" alt="Avatar de l'utilisateur">

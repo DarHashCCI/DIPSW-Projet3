@@ -133,6 +133,7 @@ $( document ).ready(function() {
                     console.log("élément mis à jour");
                     d = new Date();
                     $("#ava").attr("src","../uploads/ava/"+realId+".png?"+d.getTime());
+                    $("#avamin").css("background-image", "url(../uploads/ava/"+realId+".png?"+d.getTime()+")");
                 }
             })
         }

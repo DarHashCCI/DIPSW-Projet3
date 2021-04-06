@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Zurvan{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
@@ -20,7 +20,11 @@
     <header>
         <img src="{{ asset('assets/img/logo.png') }}" alt="Logo Zurvan">
         <div id="profileWidget">
-            <a href="{{ path("users_profile",{id:app.user.id}) }}"><div id="avamin"></div></a>
+            {% if file_exists('./uploads/ava/' ~ app.user.id ~ '.png') %}
+                <a href="{{ path("users_profile",{id:app.user.id}) }}"><div id="avamin" style="background-image:url({{ '../../uploads/ava/' ~ app.user.id ~ '.png'}});"></div></a>
+            {% else %}
+                <a href="{{ path("users_profile",{id:app.user.id}) }}"><div id="avamin" style="background-image:url({{ '../../uploads/ava/0.png'}});"></div></a>
+            {% endif %}
             <div>
                 <p>{{ app.user.email }}</p>
                 <div id="profileWidgetButtons"><a href="{{ path('calendar',{id:app.user.id}) }}"><i class="far fa-calendar-alt"></i></a><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></div>
