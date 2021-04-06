@@ -10,8 +10,8 @@ a{
 
 /* Loading animation */
 .loader {
-    display:none;
-    color: #ffffff;
+    display:block;
+    color: black;
     font-size: 90px;
     text-indent: -9999em;
     overflow: hidden;

@@ -81,6 +81,11 @@ mail_calendar_request:
   path: /mail/calendar_request
   controller: App\Controller\TestMailController::profileCalendarRequests
 
+mail_event_invite:
+  methods: POST
+  path: /mail/event/{id}/invite
+  controller: App\Controller\TestMailController::eventInvite
+
 
 #register
 register_success:

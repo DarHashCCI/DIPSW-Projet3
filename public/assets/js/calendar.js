@@ -79,7 +79,6 @@ $( document ).ready(function() {
             //info.dayEl.style.backgroundColor = 'red';
         },
         eventClick: function(info){
-            $("#loadingModal .modal-body").html("Chargement...");
             $("#loadingModal").toggle();
             $.ajax({
                 method: "POST",
@@ -164,7 +163,6 @@ $( document ).ready(function() {
         }
         if(check){
             $("#newDateModal").toggle();
-            $("#loadingModal .modal-body").html("Création en cours...");
             $("#loadingModal").toggle();
             $.ajax({
                 method: "POST",
@@ -192,7 +190,6 @@ $( document ).ready(function() {
     // Date deletion button
     $("#deleteButton").on("click",function(){
         $("#displayDateModal").toggle();
-        $("#loadingModal .modal-body").html("Suppression en cours...");
         $("#loadingModal").toggle();
         $.ajax({
             method: "DELETE",
@@ -273,7 +270,6 @@ $( document ).ready(function() {
         }
         if(check){
             $("#newDateModal").toggle();
-            $("#loadingModal .modal-body").html("Mise à jour en cours...");
             $("#loadingModal").toggle();
             $.ajax({
                 method: "PUT",
@@ -298,7 +294,7 @@ $( document ).ready(function() {
         $("#inviteDateModal .modal-footer button").css("background-color", fontColor);
         $("#inviteDateModal .modal-footer button").css("border-color", fontColor);
         $("#inviteDateModal .modal-header button").css("color", fontColor);
-        $(".loader").css("color", fontColor);
+        $("#inviteLoader").css("color", fontColor);
         $("#plsffs").val($("#dontlookpls").val());
         $("#displayDateModal").toggle();
         $("#inviteDateModal").toggle();
@@ -321,7 +317,7 @@ $( document ).ready(function() {
     //Date invite modal - Search button.
     $("#inviteDateModal .fa-search").on("click",function(){
         if($("#searchity").val().length>0){
-            $(".loader").css('display','block');
+            $("#inviteLoader").css('display','block');
             $("#searchResults").css('display','none');
             $("#searchResults").html('');
             console.log($("#searchity").val());
@@ -339,9 +335,38 @@ $( document ).ready(function() {
                             $("#searchResults").append("<div><input type=\"checkbox\" value='"+user.id+"'>Nom : "+user.last_name+" | Prénom : "+user.first_name+"<br>Email : "+user.email+"</div>");
                         })
                     }
-                    $(".loader").css('display','none');
-                    console.log(don);
+                    $("#inviteLoader").css('display','none');
                     $("#searchResults").css('display','block');
+                }
+            })
+        }
+    })
+
+    //Date invite modal - Invite button.
+    $("#inviteButton2").on("click",function(){
+        if($( "#searchResults input:checked" ).length==0){
+            alert("Impossible de n'inviter personne !");
+        }
+        else{
+            var checked= [];
+            $('#searchResults input:checked').each(function() {
+                checked.push($(this).val());
+            });
+            $("#inviteDateModal").toggle();
+            $("#loadingModal").toggle();
+            $.ajax({
+                method: "POST",
+                url: "../mail/event/"+$("#plsffs").val()+"/invite",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                data: JSON.stringify(checked),
+                processData: false,
+                success: function(data){
+                    $("#loadingModal").toggle();
+                },
+                error: function(info){
+                    $("#loadingModal").toggle();
                 }
             })
         }

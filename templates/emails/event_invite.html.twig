@@ -1,0 +1,11 @@
+Zurvan<br>
+<br>
+Vous avez été invité à un évènement. <br>
+Nom de l'évènement : {{ event.getTitle()}} <br>
+Description de l'évènement : {{ event.getDescription()}} <br>
+Date de début : {{ event.getBeginAt()|format_datetime(pattern="dd.MM.yyyy 'à' HH:mm")}} <br>
+Date de fin : {{ event.getEndAt()|format_datetime(pattern="dd.MM.yyyy 'à' HH:mm")}} <br>
+<br>
+Vous pourrez désormais le voir apparaître sur votre calendrier.<br>
+<br>
+L'équipe Zurvan.

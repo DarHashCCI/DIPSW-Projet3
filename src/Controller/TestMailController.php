@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\EventZurvan;
 use App\Entity\User;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -76,6 +77,43 @@ class TestMailController extends AbstractController
             $this->renderView(
                 $view,
                 ['user' => $sender]
+            ),
+            'text/html'
+        );
+
+        $mailer->send($message);
+
+        $logger->info('email sent');
+        return new Response('ok');
+    }
+
+    // Calendar - sending invites for a specific event
+    //  $id is the id of the event
+    public function eventInvite(Request $request,$id,\Swift_Mailer $mailer,
+                                LoggerInterface $logger)
+    {
+        $entityManager=$this->getDoctrine()->getManager();
+        $event=$this->getDoctrine()->getRepository(EventZurvan::class)
+            ->find($id);
+        $invites=json_decode($request->getContent());
+        $arr=[];
+        //Preparing the array of mail adresses + adding the event to users
+        foreach ($invites as $invite){
+            $user=$this->getDoctrine()->getRepository(User::class)
+                ->find($invite);
+            array_push($arr,$user->getEmail());
+            //Event push in user
+            $user->addEvent($event);
+            $entityManager->flush();
+        }
+        //dd($arr);
+        $message = new \Swift_Message('Zurvan - invitation à un évènement');
+        $message->setFrom('zurwan.cheetahcorp@gmail.com');
+        $message->setTo($arr);
+        $message->setBody(
+            $this->renderView(
+                'emails/event_invite.html.twig',
+                ['event' => $event]
             ),
             'text/html'
         );
