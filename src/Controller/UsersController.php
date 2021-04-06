@@ -46,6 +46,7 @@ class UsersController extends AbstractController
         }
     }
 
+    // Profile page
     public function profile (Request $request,$id)
     {
         $session = new Session();
@@ -58,7 +59,6 @@ class UsersController extends AbstractController
             //dd($user);
             if($user==null)
                 return $this->render('users/noprofile.html.twig');
-            $filesystem = new Filesystem();
             return $this->render('users/profile.html.twig', [
                 'user' => $user,
                 'isInvited' => $this->getDoctrine()->getRepository(User::class)
@@ -71,6 +71,8 @@ class UsersController extends AbstractController
         }
     }
 
+    // Profile page - update function
+    // Retrieves a single info depending on which part of the user needs to be updated.
     public function update(Request $request)
     {
         $entityManager=$this->getDoctrine()->getManager();
@@ -95,6 +97,7 @@ class UsersController extends AbstractController
         return new Response("ok");
     }
 
+    // Profile page - avatar update
     public function updateAva(Request $request,$id)
     {
         $newava=$request->files->get('newava');
