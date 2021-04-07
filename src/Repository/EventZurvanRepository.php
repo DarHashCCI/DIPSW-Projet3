@@ -48,6 +48,7 @@ class EventZurvanRepository extends ServiceEntityRepository
     }
     */
 
+    // Find events between dates - function used by the calendar to get the right events.
     public function findEventsBetweenDates($start, $end, $id)
     {
         return $this->createQueryBuilder('event')
@@ -57,6 +58,23 @@ class EventZurvanRepository extends ServiceEntityRepository
             ->setParameter('start', $start->format('Y-m-d H:i:s'))
             ->setParameter('end', $end->format('Y-m-d H:i:s'))
             ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    // Find nearest 3 events - function used by the dashboard to get the incoming 3 events.
+    public function findNearest3Events($id)
+    {
+        $date= new \DateTime();
+        return $this->createQueryBuilder('event')
+            ->join('event.invites','user')
+            ->where('event.beginAt > :start')
+            ->andWhere('user.id=:id')
+            ->setParameter('start', $date->format('Y-m-d H:i:s'))
+            ->setParameter('id',$id)
+            ->orderBy('event.beginAt','ASC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
             ;

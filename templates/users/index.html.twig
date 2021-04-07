@@ -26,7 +26,19 @@
                 <!-- Next 3 events -->
                 <section id="nextEvents">
                     <h2>Prochains évènements</h2>
-                    Soon.
+                    {% if events==null %}
+                    Aucun évènement proche à venir.
+                    {% else %}
+                        {% for event in events %}
+                            <div class="event">
+                                <div class="event-title">{{ event.getBeginAt()|format_datetime(pattern="dd.MM.yyyy '-' HH:mm")}}/{{ event.getEndAt()|format_datetime(pattern="HH:mm")}}</div>
+                                <div class="event-content">
+                                    <strong>{{ event.title }}</strong><br>
+                                    {{ event.description }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </section>
             </div>
 

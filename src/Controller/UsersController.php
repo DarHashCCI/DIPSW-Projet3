@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\EventZurvan;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -33,6 +34,8 @@ class UsersController extends AbstractController
         }
         else{
             $contain=[];
+            $user=$this->getDoctrine()->getRepository(User::class)
+                ->findBy(['email'=>$session->get('_security.last_username')])[0];
             $repository = $this->getDoctrine()->getRepository(Contact::class);
             $conts=$repository->showLastThreeContacts();
             //$conts=$repository->findAll();
@@ -42,8 +45,9 @@ class UsersController extends AbstractController
             //dd($contain);
             return $this->render('users/index.html.twig', [
                 'request' => $contain,
-                'user' => $this->getDoctrine()->getRepository(User::class)
-                    ->findBy(['email'=>$session->get('_security.last_username')])[0],
+                'user' => $user,
+                'events' => $this->getDoctrine()->getRepository(EventZurvan::class)
+                    ->findNearest3Events($user->getId()),
             ]);
         }
     }
