@@ -46,7 +46,17 @@
                 <!-- Other accessible calendars -->
                 <section id="otherCalendars">
                     <h2>Calendriers accessibles</h2>
-                    Soon.
+                    {% if invites==null %}
+                        Vous n'avez été invité(e) à voir aucun calendrier. C'est dommage.
+                    {% else %}
+                        {% for invite in invites %}
+                            {% if file_exists('./uploads/ava/' ~ invite.id ~ '.png') %}
+                                <a href="{{ path("users_profile",{id:invite.id}) }}"><div class="miniAva" style="background-image:url({{ '../../uploads/ava/' ~ invite.id ~ '.png'}});"></div></a>
+                            {% else %}
+                                <a href="{{ path("users_profile",{id:invite.id}) }}"><div class="miniAva" style="background-image:url({{ '../../uploads/ava/0.png'}});"></div></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </section>
 
                 <!-- Guest(s) to your calendar -->

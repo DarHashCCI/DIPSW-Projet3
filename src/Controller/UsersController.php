@@ -48,6 +48,8 @@ class UsersController extends AbstractController
                 'user' => $user,
                 'events' => $this->getDoctrine()->getRepository(EventZurvan::class)
                     ->findNearest3Events($user->getId()),
+                'invites' =>$this->getDoctrine()->getRepository(User::class)
+                ->findInvitesforUser($user->getId())
             ]);
         }
     }
