@@ -96,7 +96,7 @@ a{
 }
 
 /* Header */
-header, #profileWidget, #profileWidgetButtons{
+header, #profileWidget, .widgetButtons{
     display:flex;
     flex-direction: row;
 }
@@ -132,7 +132,7 @@ header{
     text-overflow: ellipsis;
 }
 
-#profileWidgetButtons{
+.widgetButtons{
     justify-content: space-evenly;
 }
 

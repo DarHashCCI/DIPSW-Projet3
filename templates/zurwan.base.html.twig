@@ -27,7 +27,7 @@
             {% endif %}
             <div>
                 <p>{{ app.user.email }}</p>
-                <div id="profileWidgetButtons"><a href="{{ path('calendar',{id:app.user.id}) }}"><i class="far fa-calendar-alt"></i></a><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></div>
+                <div class="widgetButtons"><a href="{{ path('calendar',{id:app.user.id}) }}"><i class="far fa-calendar-alt"></i></a><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></div>
             </div>
         </div>
     </header>

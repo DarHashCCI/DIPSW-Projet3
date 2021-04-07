@@ -36,6 +36,17 @@ section h2{
     margin-top:5px;
 }
 
+#lastContacts .widgetButtons{
+    margin-top:10px;
+}
+
+#lastContacts i{
+    background-color: white;
+    padding:5px;
+    border-radius: 50px;
+    font-size: 30px;
+}
+
 /* Next event section*/
 #nextEvents{
     background-color: var(--zurvan-red);
