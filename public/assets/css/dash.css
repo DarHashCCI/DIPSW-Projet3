@@ -1,15 +1,29 @@
-#lastContacts, #nextEvents{
+section{
     border-radius:20px;
     padding:10px;
 }
 
-#lastContacts{
-    background-color: var(--zurvan-blue);
+.container, section ~ section{
+    margin-top:20px;
 }
 
-#nextEvents{
-    margin-top:10px;
-    background-color: var(--zurvan-red);
+section h2{
+    padding: 5px;
+    background-color: white;
+    border-radius:20px;
+}
+
+.miniAva{
+    border-radius: 100%;
+    width: 90px;
+    height: 90px;
+    overflow:hidden;
+    background-size: cover;
+}
+
+/* Contacts section*/
+#lastContacts{
+    background-color: var(--zurvan-blue);
 }
 
 .contact{
@@ -20,4 +34,20 @@
 
 .contact ~ .contact{
     margin-top:5px;
+}
+
+/* Next event section*/
+#nextEvents{
+    background-color: var(--zurvan-red);
+}
+
+/* Invites section*/
+#otherCalendars{
+    background-color: var(--zurvan-yellow);
+}
+
+
+/* Guests section*/
+#calGuests{
+    background-color: var(--zurvan-green2);
 }

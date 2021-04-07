@@ -42,6 +42,8 @@ class UsersController extends AbstractController
             //dd($contain);
             return $this->render('users/index.html.twig', [
                 'request' => $contain,
+                'user' => $this->getDoctrine()->getRepository(User::class)
+                    ->findBy(['email'=>$session->get('_security.last_username')])[0],
             ]);
         }
     }

@@ -8,28 +8,53 @@
 
 {% block body %}
     <div class="container">
-        <div class="col-3">
-            <!-- Last 3 contacts -->
-            <div id="lastContacts">
-                <h2>Répertoire</h2>
-                <div>Derniers contacts ajoutés :</div>
-                {% for infos in request %}
-                    <div class="contact">
-                        {% for key, info in infos %}
-                            <strong>{{ key }}</strong> : {{ info }}<br>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-                <a href="{{ path('contacts_index') }}">Plus>></a>
+        <div class="row"><div class="col-3">
+                <!-- Last 3 contacts -->
+                <section id="lastContacts">
+                    <h2>Répertoire</h2>
+                    <div>Derniers contacts ajoutés :</div>
+                    {% for infos in request %}
+                        <div class="contact">
+                            {% for key, info in infos %}
+                                <strong>{{ key }}</strong> : {{ info }}<br>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <a href="{{ path('contacts_index') }}">Plus>></a>
+                </section>
+
+                <!-- Next 3 events -->
+                <section id="nextEvents">
+                    <h2>Prochains évènements</h2>
+                    Soon.
+                </section>
             </div>
 
-            <!-- Next 3 events -->
-            <div id="nextEvents">
-                <h2>Prochains évènements</h2>
-                Soon.
+            <div class="col-9">
+                <!-- Other accessible calendars -->
+                <section id="otherCalendars">
+                    <h2>Calendriers accessibles</h2>
+                    Soon.
+                </section>
+
+                <!-- Guest(s) to your calendar -->
+                <section id="calGuests">
+                    <h2>Invité(es) à votre calendrier</h2>
+                    <div class="row" style="margin-left: 0px;margin-right:0px">
+                    {% if user.invitedUsers.isEmpty() %}
+                    Aucun invité. Pourquoi ne pas chercher du monde à inviter ?
+                    {% else %}
+                        {% for invite in user.invitedUsers %}
+                            {% if file_exists('./uploads/ava/' ~ invite.id ~ '.png') %}
+                                <a href="{{ path("users_profile",{id:invite.id}) }}"><div class="miniAva" style="background-image:url({{ '../../uploads/ava/' ~ invite.id ~ '.png'}});"></div></a>
+                            {% else %}
+                                <a href="{{ path("users_profile",{id:invite.id}) }}"><div class="miniAva" style="background-image:url({{ '../../uploads/ava/0.png'}});"></div></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </section>
             </div>
         </div>
-
-        <div class="col-9"></div>
     </div>
 {% endblock %}
