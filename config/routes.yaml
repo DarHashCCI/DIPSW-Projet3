@@ -18,9 +18,9 @@ calendar:
 
 
 #contacts
-contact_index:
+contacts_index:
   methods: GET
-  path: /contact
+  path: /contacts
   controller: App\Controller\ContactsController::index
 
 contact_edit:

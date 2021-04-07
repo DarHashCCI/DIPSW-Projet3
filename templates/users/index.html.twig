@@ -7,14 +7,29 @@
 {% endblock %}
 
 {% block body %}
-    <div id="lastContacts">
-        <h2>Contacts</h2>
-        {% for infos in request %}
-            <div class="contact">
-                {% for key, info in infos %}
-                    <strong>{{ key }}</strong> : {{ info }}<br>
+    <div class="container">
+        <div class="col-3">
+            <!-- Last 3 contacts -->
+            <div id="lastContacts">
+                <h2>Répertoire</h2>
+                <div>Derniers contacts ajoutés :</div>
+                {% for infos in request %}
+                    <div class="contact">
+                        {% for key, info in infos %}
+                            <strong>{{ key }}</strong> : {{ info }}<br>
+                        {% endfor %}
+                    </div>
                 {% endfor %}
+                <a href="{{ path('contacts_index') }}">Plus>></a>
             </div>
-        {% endfor %}
+
+            <!-- Next 3 events -->
+            <div id="nextEvents">
+                <h2>Prochains évènements</h2>
+                Soon.
+            </div>
+        </div>
+
+        <div class="col-9"></div>
     </div>
 {% endblock %}

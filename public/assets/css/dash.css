@@ -1,5 +1,21 @@
+#lastContacts, #nextEvents{
+    border-radius:20px;
+    padding:10px;
+}
+
+#lastContacts{
+    background-color: var(--zurvan-blue);
+}
+
+#nextEvents{
+    margin-top:10px;
+    background-color: var(--zurvan-red);
+}
+
 .contact{
     border: 1px black solid;
+    background-color: white;
+    padding:5px;
 }
 
 .contact ~ .contact{
