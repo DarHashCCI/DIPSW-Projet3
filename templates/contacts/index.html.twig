@@ -1,13 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'zurwan.base.html.twig' %}
 
-{% block title %}Hello ContactsController!{% endblock %}
+{% block title %}Zurvan - répertoire de contacts{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/contacts.css') }}">
+{% endblock %}
 
 {% block body %}
-    {% for infos in request %}
-        {% for key, info in infos %}
-            <strong>{{ key }}</strong> : {{ info }}<br>
-        {% endfor %}
-        <hr>
-    {% endfor %}
-
+    <div class="container">
+        <div class="card">
+            <div class="card-header"><h2>Répertoire</h2></div>
+            <ul class="list-group list-group-flush">
+            {% for infos in request %}
+                <li class="list-group-item">
+                {% for key, info in infos %}
+                    <strong>{{ key }}</strong> : {{ info }}<br>
+                {% endfor %}
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
