@@ -2,14 +2,18 @@
 
 {% block title %}Zurvan - Inscription{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
+{% endblock %}
+
 {% block body %}
+    <div class="container">
+        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo Survan" id="logo">
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-
-    <h1>S'inscrire</h1>
-
     {{ form_start(registrationForm) }}
+        <div id="divh1"><h2>S'inscrire</h2></div>
         {{ form_row(registrationForm.email, {
             label: 'Adresse mail'
         }) }}
@@ -22,6 +26,7 @@
 
         <button type="submit" class="btn">S'inscrire</button>
     {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}
 {% block scriptend %}
     <script src="{{ asset('assets/js/loginregister/pass.js') }}"></script>

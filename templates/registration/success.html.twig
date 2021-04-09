@@ -7,6 +7,9 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container" id="success">
     Inscription réussie ! Vous avez normalement reçu un mail pour vérifier votre adresse mail.
     Consultez votre boîte mail pour vérifier votre adresse mail.
+        <a href="{{ path("app_login") }}"><button class="btn btn-lg btn-primary">Retour à l'écran de connexion</button></a>
+    </div>
 {% endblock %}
