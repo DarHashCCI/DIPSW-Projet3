@@ -15,10 +15,12 @@
     {{ form_start(registrationForm) }}
         <div id="divh1"><h2>S'inscrire</h2></div>
         {{ form_row(registrationForm.email, {
-            label: 'Adresse mail'
+            label: 'Adresse mail',
+            'attr': {'class': 'form-control'}
         }) }}
         {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
+            label: 'Mot de passe',
+            'attr': {'class': 'form-control'}
         }) }}
         {{ form_row(registrationForm.agreeTerms, {
             label: "J'accepte que mes infos personnelles renseignées sur le site soient stockées sur ce dernier jusqu'à la résiliation de mon compte."
@@ -26,6 +28,7 @@
 
         <button type="submit" class="btn">S'inscrire</button>
     {{ form_end(registrationForm) }}
+        <a href="{{ path("app_login") }}">Déjà un compte ?</a>
     </div>
 {% endblock %}
 {% block scriptend %}
