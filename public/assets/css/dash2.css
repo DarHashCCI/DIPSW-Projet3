@@ -1,0 +1,85 @@
+section{
+    border-radius:20px;
+}
+
+section *:not(h2,strong,i){
+    padding:10px;
+    background-color: white;
+}
+
+.container, section ~ section{
+    margin-top:20px;
+}
+
+section h2{
+    padding: 5px;
+    color:white;
+    text-align:center;
+}
+
+.miniAva{
+    border-radius: 100%;
+    width: 90px;
+    height: 90px;
+    overflow:hidden;
+    background-size: cover;
+}
+
+/* Contacts section*/
+#lastContacts{
+    background-color: var(--zurvan-blue);
+    border: 1px solid var(--zurvan-blue);
+}
+
+.contact,.event{
+    border: 1px black solid;
+    background-color: white;
+    padding:5px;
+}
+
+#lastContacts .widgetButtons{
+    border-radius: 0 0 20px 20px;
+    align-items: center;
+}
+
+#lastContacts i{
+    background-color: var(--zurvan-blue);
+    color:white;
+    padding:10px;
+    border-radius: 50px;
+    font-size: 30px;
+}
+
+.fa-angle-double-right{
+    padding-left: 12px!important;
+    padding-right: 12px!important;
+}
+
+/* Next event section*/
+#nextEvents{
+    background-color: var(--zurvan-red);
+    border: 1px solid var(--zurvan-red);
+}
+#events{
+    border-radius: 0 0 20px 20px;
+}
+
+/* Invites section*/
+#otherCalendars{
+    background-color: var(--zurvan-yellow);
+    border: 1px solid var(--zurvan-yellow);
+}
+
+#otherCalendars .row{
+    border-radius: 0 0 20px 20px;
+}
+
+/* Guests section*/
+#calGuests{
+    background-color: var(--zurvan-green2);
+    border: 1px solid var(--zurvan-green2);
+}
+
+#calGuests .row{
+    border-radius: 0 0 20px 20px;
+}

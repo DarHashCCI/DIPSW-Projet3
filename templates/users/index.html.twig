@@ -3,7 +3,7 @@
 {% block title %}Zurvan - dashboard{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/dash.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/dash2.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -30,6 +30,7 @@
                 <!-- Next 3 events -->
                 <section id="nextEvents">
                     <h2>Prochains évènements</h2>
+                    <div id="events">
                     {% if events==null %}
                     Aucun évènement proche à venir.
                     {% else %}
@@ -43,6 +44,7 @@
                             </div>
                         {% endfor %}
                     {% endif %}
+                    </div>
                 </section>
             </div>
 
