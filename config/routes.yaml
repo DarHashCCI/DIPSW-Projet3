@@ -23,16 +23,6 @@ contacts_index:
   path: /contacts
   controller: App\Controller\ContactsController::index
 
-contact_edit:
-  methods: GET
-  path: /contact/edit/{id}
-  controller: App\Controller\ContactsController::edit
-
-contact_new:
-  methods: GET
-  path: /contact/new
-  controller: App\Controller\ContactsController::new
-
 contact_create:
   methods: POST
   path: /contact/create
