@@ -33,6 +33,11 @@ contact_delete:
   path: /contact/delete/{id}
   controller: App\Controller\ContactsController::delete
 
+contact_specific_list:
+  methods: POST
+  path: /contact/list
+  controller: App\Controller\ContactsController::specifList
+
 contact_update:
   methods: PUT
   path: /contact/update/{id}

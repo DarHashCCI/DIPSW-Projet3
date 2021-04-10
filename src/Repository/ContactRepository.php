@@ -80,6 +80,17 @@ class ContactRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findContactsByString($str)
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.infos')
+            ->where('c.infos LIKE :str')
+            ->setParameter('str','%'.$str.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Contact[] Returns an array of Contact objects
     //  */

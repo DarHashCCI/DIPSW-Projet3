@@ -83,3 +83,22 @@ section h2{
 #calGuests .row{
     border-radius: 0 0 20px 20px;
 }
+
+/* Search modal */
+#searchLoader{
+    display:none;
+}
+
+#searchResults{
+    height:200px;
+    border:2px black solid;
+    overflow-y: scroll;
+}
+
+.searchResult{
+    padding:10px;
+}
+
+.searchResult ~ .searchResult{
+    border-top:1px solid black;
+}

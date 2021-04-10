@@ -6,12 +6,17 @@ use App\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ContactsController extends AbstractController
 {
     // Contact index page
     public function index(): Response
     {
+        $session = new Session();
+        if($session->get('_security.last_username')==null){
+            return $this->redirectToRoute('app_login');
+        }
         $contain=[];
         $repository = $this->getDoctrine()->getRepository(Contact::class);
         $conts=$repository->findAll();
@@ -40,6 +45,13 @@ class ContactsController extends AbstractController
         $cont=$repository->create_contact($test);
         //dd(json_encode($test,true));
         return new Response($cont);
+    }
+
+    // Contact search function with specific list as Json
+    public function specifList(Request $request): Response
+    {
+        $contsSearched=$this->getDoctrine()->getRepository(Contact::class)->findContactsByString($request->request->get('str'));
+        return new Response(json_encode($contsSearched));
     }
 
     // Contact update function

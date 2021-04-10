@@ -94,7 +94,7 @@ class EventController extends AbstractController
                     ->find($id);
 
                 //If it's our calendar
-                if(($ourGuy[0]->getId()==$id))
+                if(($ourGuy[0]->getId()==$id) or ($ourGuy[0]->isAdmin()))
                     return $this->render('event/calendar.html.twig', [
                         'id' => $id,
                         'autho' => true,
