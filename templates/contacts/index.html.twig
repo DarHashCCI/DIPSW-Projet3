@@ -13,6 +13,7 @@
             <ul class="list-group list-group-flush">
             {% for ky, infos in request %}
                 <li class="list-group-item" id="contact-{{ ky }}">
+                    <div class="editButtons"><i class="fas fa-pen"></i><i class="fas fa-times"></i></div>
                 {% for key, info in infos %}
                     <strong>{{ key }}</strong> : {{ info }}<br>
                 {% endfor %}

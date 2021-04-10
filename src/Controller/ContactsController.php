@@ -35,6 +35,13 @@ class ContactsController extends AbstractController
         ]);
     }
 
+    // Contact delete function
+    public function delete(Request $request, $id): Response
+    {
+        $todel = $this->getDoctrine()->getRepository(Contact::class)->delete_contact($id);
+        return new Response("Deletion done");
+    }
+
     public function new(): Response
     {
         return $this->render('contacts/new.html.twig');

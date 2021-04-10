@@ -6,7 +6,9 @@
     border: 1px solid var(--zurvan-blue);
     position:relative;
 }
-
+.fas{
+    cursor:pointer;
+}
 .fa-plus{
     position: absolute;
     top:15px;
@@ -22,4 +24,23 @@
     background-color: var(--zurvan-blue);
     color:white;
     text-align:center;
+}
+
+li{
+    position:relative;
+}
+
+li:hover .editButtons{
+    visibility: visible;
+}
+
+.editButtons{
+    position: absolute;
+    top:10px;
+    right:20px;
+    visibility: hidden;
+}
+
+.editButtons * ~ *{
+    margin-left:10px;
 }

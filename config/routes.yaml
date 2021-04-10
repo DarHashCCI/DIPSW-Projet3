@@ -38,6 +38,11 @@ contact_create:
   path: /contact/create
   controller: App\Controller\ContactsController::create
 
+contact_delete:
+  methods: DELETE
+  path: /contact/delete/{id}
+  controller: App\Controller\ContactsController::delete
+
 contact_update:
   methods: PUT
   path: /contact/update/{id}

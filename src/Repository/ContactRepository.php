@@ -42,6 +42,17 @@ class ContactRepository extends ServiceEntityRepository
         }
     }
 
+    // Contact deletion request
+    public function delete_contact($id)
+    {
+        $query=$this->createQueryBuilder('c')
+            ->where('c.id=:id')
+            ->setParameter('id',$id)
+            ->delete();
+
+        return $query->getQuery()->execute();
+    }
+
     public function update_contact($id,string $js)
     {
         $entityManager=$this->getEntityManager();

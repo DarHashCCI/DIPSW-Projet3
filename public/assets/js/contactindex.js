@@ -88,7 +88,7 @@ $( document ).ready(function() {
                 data: JSON.stringify(cont),
                 processData: false,
                 success: function(data){
-                    $('.list-group.list-group-flush').append("<li class=\"list-group-item\" id=\"contact-"+data+"\">");
+                    $('.list-group.list-group-flush').append("<li class=\"list-group-item\" id=\"contact-"+data+"\"><div class=\"editButtons\"><i class=\"fas fa-pen\"></i><i class=\"fas fa-times\"></i></div></li>");
                     $("label").each(function(){
                         $("#contact-"+data).append("<strong>"+$(this).text()+"</strong> : "+$(this).next().val()+"<br>");
                     });
@@ -100,5 +100,24 @@ $( document ).ready(function() {
                 }
             })
         }
+    });
+
+    //Editing a contact - modal generation
+
+    //Editing a contact - the actual editing
+
+    //Deleting a contact
+    $("body").on("click",".fa-times",function(){
+        id=(($(this).parent().parent().attr('id')).slice(8));
+        console.log(id);
+        $("#loadingModal").toggle();
+        $.ajax({
+            method: "DELETE",
+            url: "/contact/delete/"+id,
+            success: function(){
+                $("#contact-"+id).remove();
+                $("#loadingModal").toggle();
+            }
+        })
     });
 });
