@@ -13,8 +13,7 @@ class ContactsController extends AbstractController
     {
         $contain=[];
         $repository = $this->getDoctrine()->getRepository(Contact::class);
-        $conts=$repository->showLastThreeContacts();
-        //$conts=$repository->findAll();
+        $conts=$repository->findAll();
         foreach($conts as $cont){
             $contain[$cont->getId()]=json_decode($cont->getInfos(),true);
             //$cont->setInfos(json_decode($cont->getInfos(),true));
@@ -48,7 +47,7 @@ class ContactsController extends AbstractController
         $repository = $entityManager->getRepository(Contact::class);
         $cont=$repository->create_contact($test);
         //dd(json_encode($test,true));
-        return new Response("c'est bon");
+        return new Response($cont);
     }
 
     public function update(Request $request, $id): Response

@@ -35,6 +35,7 @@ class ContactRepository extends ServiceEntityRepository
             $entityManager->persist($contact);
             $entityManager->flush();
             $connection->commit();
+            return $contact->getid();
         } catch (\Exception $e){
             $connection->rollback();
             throw $e;

@@ -18,7 +18,7 @@
     </head>
     {% if app.user %}
     <header>
-        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo Zurvan">
+        <img id="logoHeader" src="{{ asset('assets/img/logo.png') }}" alt="Logo Zurvan">
         <div id="profileWidget">
             {% if file_exists('./uploads/ava/' ~ app.user.id ~ '.png') %}
                 <a href="{{ path("users_profile",{id:app.user.id}) }}"><div id="avamin" style="background-image:url({{ '../../uploads/ava/' ~ app.user.id ~ '.png'}});"></div></a>

@@ -8,11 +8,11 @@
 
 {% block body %}
     <div class="container">
-        <div class="card">
+        <div class="card"><i class="fas fa-plus"></i>
             <div class="card-header"><h2>Répertoire</h2></div>
             <ul class="list-group list-group-flush">
-            {% for infos in request %}
-                <li class="list-group-item">
+            {% for ky, infos in request %}
+                <li class="list-group-item" id="contact-{{ ky }}">
                 {% for key, info in infos %}
                     <strong>{{ key }}</strong> : {{ info }}<br>
                 {% endfor %}
@@ -21,4 +21,29 @@
             </ul>
         </div>
     </div>
+
+    <!-- Contact modal - used to create and edit contacts -->
+    <div id="contactModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scriptend %}
+    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+    <script src="{{ asset('assets/js/contactindex.js') }}"></script>
 {% endblock %}

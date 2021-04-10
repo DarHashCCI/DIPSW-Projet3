@@ -103,6 +103,11 @@ header, #profileWidget, .widgetButtons{
 
 header{
     justify-content: space-between;
+    padding:0 20px 0 20px;
+}
+
+#logoHeader{
+    height:100px;
 }
 
 #profileWidget{

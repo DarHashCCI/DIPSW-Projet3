@@ -137,6 +137,7 @@ class EventController extends AbstractController
             $ea->modify(($dr['milliseconds']/60000).' minutes');
             $event->setEndAt(new \DateTime($ea->format('Y-m-d H:i:s')));
         }
+
         // Event resize
         if($re=$request->request->get('re')){
             $ea=$event->getEndAt();
@@ -147,6 +148,7 @@ class EventController extends AbstractController
             $ea->modify(($re['milliseconds']/60000).' minutes');
             $event->setEndAt(new \DateTime($ea->format('Y-m-d H:i:s')));
         }
+
         // Event update
         if($upd=$request->request->get('upd')){
             $values= array();
