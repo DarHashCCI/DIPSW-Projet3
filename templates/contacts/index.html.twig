@@ -8,12 +8,12 @@
 
 {% block body %}
     <div class="container">
-        <div class="card"><i class="fas fa-plus"></i>
+        <div class="card">{% if app.user.isAdmin() %}<i class="fas fa-plus"></i>{% endif %}
             <div class="card-header"><h2>Répertoire</h2></div>
             <ul class="list-group list-group-flush">
             {% for ky, infos in request %}
                 <li class="list-group-item" id="contact-{{ ky }}">
-                    <div class="editButtons"><i class="fas fa-pen"></i><i class="fas fa-times"></i></div>
+                    {% if app.user.isAdmin() %}<div class="editButtons"><i class="fas fa-pen"></i><i class="fas fa-times"></i></div>{% endif %}
                 {% for key, info in infos %}
                     <strong>{{ key }}</strong> : {{ info }}<br>
                 {% endfor %}
@@ -46,5 +46,5 @@
 
 {% block scriptend %}
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
-    <script src="{{ asset('assets/js/contactindex.js') }}"></script>
+    {% if app.user.isAdmin() %}<script src="{{ asset('assets/js/contactindex.js') }}"></script>{% endif %}
 {% endblock %}
