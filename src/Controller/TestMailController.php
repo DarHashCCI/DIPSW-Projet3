@@ -123,4 +123,40 @@ class TestMailController extends AbstractController
         $logger->info('email sent');
         return new Response('ok');
     }
+
+    /* Dashboard - sending calendar invites */
+    public function dashCalendarInvites(Request $request, \Swift_Mailer $mailer,
+                                            LoggerInterface $logger,$id)
+    {
+        $entityManager=$this->getDoctrine()->getManager();
+        $mainUser=$this->getDoctrine()->getRepository(User::class)
+            ->find($id);
+        $invites=json_decode($request->getContent());
+        $arr=[];
+        //Preparing the array of mail adresses + adding the users to the main users guest list
+        foreach ($invites as $invite){
+            $user=$this->getDoctrine()->getRepository(User::class)
+                ->find($invite);
+            array_push($arr,$user->getEmail());
+            //Guest push in user
+            $mainUser->addInvitedUser($user);
+            $entityManager->flush();
+        }
+        //dd($arr);
+        $message = new \Swift_Message('Zurvan - invitation à un calendrier');
+        $message->setFrom('zurwan.cheetahcorp@gmail.com');
+        $message->setTo($arr);
+        $message->setBody(
+            $this->renderView(
+                'emails/cal_accessgranted.html.twig',
+                ['user' => $mainUser]
+            ),
+            'text/html'
+        );
+
+        $mailer->send($message);
+
+        $logger->info('email sent');
+        return new Response('ok');
+    }
 }

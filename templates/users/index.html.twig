@@ -51,6 +51,7 @@
             <div class="col-9">
                 <!-- Other accessible calendars -->
                 <section id="otherCalendars">
+                    <i id="begPeople" class="fas fa-search"></i>
                     <h2>Calendriers accessibles</h2>
                     <div class="row" style="margin-left: 0px;margin-right:0px">
                     {% if invites==null %}
@@ -69,6 +70,7 @@
 
                 <!-- Guest(s) to your calendar -->
                 <section id="calGuests">
+                    <i id="invitePeople" class="fas fa-search"></i>
                     <h2>Invité(es) à votre calendrier</h2>
                     <div class="row" style="margin-left: 0px;margin-right:0px">
                     {% if user.invitedUsers.isEmpty() %}
@@ -113,9 +115,10 @@
             </div>
         </div>
     </div>
-
-    <button id="inviteButton2" type="button" class="btn btn-primary">Inviter</button>
 {% endblock %}
 {% block scriptend %}
+    <script type="text/javascript">
+        var id={{ app.user.id }};
+    </script>
         <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 {% endblock %}

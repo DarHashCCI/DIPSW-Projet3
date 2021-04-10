@@ -176,7 +176,7 @@ class EventController extends AbstractController
         if(!$event){
             throw $this->createNotFoundException("Évènement introuvable");
         }
-        $usersSearched=$this->getDoctrine()->getRepository(User::class)->findUsersByString($request->request->get('str'),$id,$request->request->get('id'));
+        $usersSearched=$this->getDoctrine()->getRepository(User::class)->findUsersByStringForEvent($request->request->get('str'),$id,$request->request->get('id'));
         return new Response(json_encode($usersSearched));
 
     }

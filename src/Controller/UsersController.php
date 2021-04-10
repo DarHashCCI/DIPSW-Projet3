@@ -113,4 +113,11 @@ class UsersController extends AbstractController
         $newava->move($dest,$id.".png");
         return new Response("ok");
     }
+
+    // Dashboard - seeking users from a string
+    public function seekInvites(Request $request,$id)
+    {
+        $usersSearched=$this->getDoctrine()->getRepository(User::class)->findUsersByStringForCalendar($request->request->get('str'),$id);
+        return new Response(json_encode($usersSearched));
+    }
 }

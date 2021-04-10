@@ -56,6 +56,12 @@
         <script>
             var redirUrl="{{ path('users_update',{id:user.id}) }}";</script>
         <script src="{{ asset('assets/js/profile/profileedit.js') }}"></script>
+    {% elseif app.user.isAdmin() %}
+        <script>
+            var redirUrl="{{ path('users_update',{id:user.id}) }}";
+            var ourId={{app.user.id}};</script>
+        <script src="{{ asset('assets/js/profile/profileedit.js') }}"></script>
+        <script src="{{ asset('assets/js/profile/profilerequests.js') }}"></script>
     {% else %}
         <script>var ourId={{app.user.id}}; </script>
         <script src="{{ asset('assets/js/profile/profilerequests.js') }}"></script>

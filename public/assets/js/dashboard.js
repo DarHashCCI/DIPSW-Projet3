@@ -1,4 +1,21 @@
 $( document ).ready(function() {
+    /* storing the user id for later*/
+    var realId=id;
+    var subdata;
+
+    // checking existence of file synchronously - credit to code-grepper
+    function doesImgExist(img) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', '../../uploads/ava/'+img+'.png', false);
+        xhr.send();
+        if(xhr.status==true) return img;
+        else return 0;
+    }
+
+    $('#begPeople').on('click',function(){
+        console.log(doesImgExist(7));
+    })
+
     //search modal - Close button. Aka "fixing Bootstrap's shit"
     $("#searchModal button.close").on("click",function(){
         $("#searchResults").html('');
@@ -20,7 +37,7 @@ $( document ).ready(function() {
     // Search modal - Contact - Searching
     $("body").on("click","#searchContacts2",function(){
         if($("#searchity").val().length>0){
-            $("#inviteLoader").css('display','block');
+            $("#searchLoader").css('display','block');
             $("#searchResults").css('display','none');
             $("#searchResults").html('');
             console.log($("#searchity").val());
@@ -48,10 +65,93 @@ $( document ).ready(function() {
                             }
                         }
                     }
-                    $("#inviteLoader").css('display','none');
+                    $("#searchLoader").css('display','none');
                     $("#searchResults").css('display','block');
                 }
             })
         }
     })
+
+    // Search modal - Calendar invite - Showing the modal
+    $('body').on("click",'#invitePeople', function(){
+        $("#searchModal .modal-title").text('Inviter des utilisateurs');
+        $("#searchity").prev().text('Info à chercher : ');
+        $('.modal-body .fa-search').attr("id","invitePeople2");
+        $("#searchModal .modal-footer").html("<button id=\"invitePeopleButton\" type=\"button\" class=\"btn btn-primary\">Inviter</button>")
+        $("#searchModal").toggle();
+    })
+
+    // Search modal - Calendar invite - Searching for people to invite
+    $("body").on("click","#invitePeople2",function(){
+        if($("#searchity").val().length>0){
+            $("#searchLoader").css('display','block');
+            $("#searchResults").css('display','none');
+            $("#searchResults").html('');
+            console.log($("#searchity").val());
+            $.ajax({
+                method: "POST",
+                url: "../calendar/seek/"+realId,
+                data: {str:$("#searchity").val()},
+                success: function(data){
+                    var don=JSON.parse(data);
+                    if(don.length==0){
+                        $("#searchResults").html("Aucun résultat trouvé");
+                    }
+                    else{
+                        don.forEach(function(user){
+                            $("#searchResults").append("<div class='searchResult'><input type=\"checkbox\" value='"+user.id+"'>Nom : "+user.last_name+" | Prénom : "+user.first_name+"<br>Email : "+user.email+"</div>");
+                        })
+                    }
+                    $("#searchLoader").css('display','none');
+                    $("#searchResults").css('display','block');
+                }
+            })
+        }
+    })
+
+    // Search modal - Calendar invite - Sending the checked searched invites
+    $("body").on("click","#invitePeopleButton",function(){
+        if($( "#searchResults input:checked" ).length==0){
+            alert("Impossible de n'inviter personne !");
+        }
+        else{
+            var checked= [];
+            $('#searchResults input:checked').each(function() {
+                checked.push($(this).val());
+            });
+            $("#loadingModal").toggle();
+            $("#searchModal").toggle();
+            $.ajax({
+                method: "POST",
+                url: "../mail/calendar/"+realId+"/invite",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                data: JSON.stringify(checked),
+                processData: false,
+                success: function(data){
+                    $("#loadingModal").toggle();
+                    console.log($("#calGuests .row").children.length);
+                    for(check in checked){
+                        $("#calGuests .row").append("<a href=\"/profile/"+check+"\"><div class=\"miniAva\" style=\"background-image:url(../../uploads/ava/"+doesImgExist(checked[check])+".png);\"></div></a>")
+                    }
+                },
+                error: function(info){
+                    $("#loadingModal").toggle();
+                    console.log(checked);
+                    if(($("#calGuests .row").find("a").length)==0)
+                    $("#calGuests .row").html("");
+                    for(check in checked){
+                        $("#calGuests .row").append("<a href=\"/profile/"+checked[check]+"\"><div class=\"miniAva\" style=\"background-image:url(../../uploads/ava/"+doesImgExist(checked[check])+".png);\"></div></a>")
+                    }
+                }
+            })
+        }
+    })
+
+    // Search modal - Guesting - Showing the modal
+
+    // Search modal - Guesting - Searching for people to beg for an invite
+
+    // Search modal - Guesting - Sending beg
 });
