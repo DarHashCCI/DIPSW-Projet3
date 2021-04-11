@@ -78,9 +78,9 @@
                     {% else %}
                         {% for invite in user.invitedUsers %}
                             {% if file_exists('./uploads/ava/' ~ invite.id ~ '.png') %}
-                                <a href="{{ path("users_profile",{id:invite.id}) }}"><div class="miniAva" style="background-image:url({{ '../../uploads/ava/' ~ invite.id ~ '.png'}});"></div></a>
+                                <a href="{{ path("users_profile",{id:invite.id}) }}"><div class="miniAva" style="background-image:url({{ asset('uploads/ava/'~user.id~'.png')|imagine_filter('miniava')}});"></div></a>
                             {% else %}
-                                <a href="{{ path("users_profile",{id:invite.id}) }}"><div class="miniAva" style="background-image:url({{ '../../uploads/ava/0.png'}});"></div></a>
+                                <a href="{{ path("users_profile",{id:invite.id}) }}"><div class="miniAva" style="background-image:url({{ asset('uploads/ava/0.png')|imagine_filter('miniava')}});"></div></a>
                             {% endif %}
                         {% endfor %}
                     {% endif %}
