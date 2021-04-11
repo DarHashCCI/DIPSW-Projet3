@@ -29,6 +29,14 @@ input:focus {
     border-color: black;
 }
 
+body{
+    font-family: 'Lato', sans-serif;
+}
+h1,h2,h3{
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight:700;
+}
+
 /* Loading animation */
 .loader {
     display:block;
