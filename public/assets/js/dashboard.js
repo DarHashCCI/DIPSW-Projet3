@@ -8,7 +8,7 @@ $( document ).ready(function() {
         var xhr = new XMLHttpRequest();
         xhr.open('HEAD', '../../uploads/ava/'+img+'.png', false);
         xhr.send();
-        if(xhr.status==true) return img;
+        if(xhr.status===200) return img;
         else return 0;
     }
 
