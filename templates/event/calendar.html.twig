@@ -1,17 +1,14 @@
 {% extends 'zurwan.base.html.twig' %}
 
 {% block stylesheets %}
+    <link href='{{ asset('assets/css/jquery-ui.css') }}' rel='stylesheet' />
     <link href='{{ asset('assets/css/fullcalendar/main.css') }}' rel='stylesheet' />
     <link href='{{ asset('assets/css/calendar.css') }}' rel='stylesheet' />
-    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">-->
 {% endblock %}
 
 {% block body %}
 
     <div id="calendar-holder"></div>
-
     <div id="newDateModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -110,14 +107,9 @@
 {% endblock %}
 
 {% block scriptend %}
+    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
     <script src='{{ asset('assets/js/fullcalendar/main.js') }}'></script>
     <script src='{{ asset('assets/js/fullcalendar/fr.js') }}'></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/locales/fr.js"></script>-->
-
     <script type="text/javascript">
         var urf="{{ path('fc_load_events') }}";
         var id={{ id }};

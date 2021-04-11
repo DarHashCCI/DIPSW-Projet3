@@ -21,7 +21,7 @@
         <a href="{{ path("index") }}"><img id="logoHeader" src="{{ asset('assets/img/logo.png')|imagine_filter('logoheader') }}" alt="Logo Zurvan"></a>
         <div id="profileWidget">
             {% if file_exists('./uploads/ava/' ~ app.user.id ~ '.png') %}
-                <a href="{{ path("users_profile",{id:app.user.id}) }}"><div id="avamin" style="background-image:url({{ asset('uploads/ava/'~app.user.id~'.png')|imagine_filter('miniava')}});"></div></a>
+                <a href="{{ path("users_profile",{id:app.user.id}) }}"><div id="avamin" style="background-image:url({{ asset('uploads/ava/'~app.user.id~'.png')}});"></div></a>
             {% else %}
                 <a href="{{ path("users_profile",{id:app.user.id}) }}"><div id="avamin" style="background-image:url({{ asset('uploads/ava/0.png')|imagine_filter('miniava')}});"></div></a>
             {% endif %}

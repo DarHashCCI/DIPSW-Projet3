@@ -106,6 +106,40 @@ $( document ).ready(function() {
     });
     calendar.render();
 
+    $(".fc-toolbar-title").append('<input type="hidden" id="datepicker"></input>');
+    $(function() {
+        $("#datepicker").datepicker({
+            showOn: "both",
+            showOptions: {
+                direction: "down"
+            },
+            buttonImage: "http://www.tutorialspark.com/jqueryUI/calender.png",
+            autoSize: true,
+            changeMonth: true,
+            changeYear: true,
+            currentText: "Now",
+            firstDay: 1,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            closeText: 'Fermer',
+            prevText: 'Précédent',
+            nextText: 'Suivant',
+            currentText: 'Aujourd\'hui',
+            monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+            dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+            dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            weekHeader: 'Sem.',
+            onSelect: function(formated, dates) {
+                calendar.gotoDate(formated);
+            }
+        });;$.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
+        $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
+        $("#datepicker").datepicker( "setDate" , "+0d" );
+    });
+
+
     //RGB to hex - used for the color input that don't accept rgb values
     function rgbToHex(r) {
         var a = r.split("(")[1].split(")")[0];

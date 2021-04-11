@@ -48,6 +48,29 @@ button.fc-button-active{
     background-color: var(--zurvan-blue-modal)!important;
 }
 
+
+/* Datepicker */
+
+.ui-datepicker-trigger{
+    margin-left:10px;
+    background-color: white!important;
+    border-radius:50px;
+    margin-top:10px;
+}
+
+.ui-datepicker{
+    padding:0!important;
+}
+
+.ui-datepicker-header{
+    border:none;
+    background-color: var(--zurvan-red)!important;
+}
+
+.ui-datepicker-calendar{
+    padding:5px;
+}
+
 /* Date modal */
 #newDateModal label{
     display: inline-block;
