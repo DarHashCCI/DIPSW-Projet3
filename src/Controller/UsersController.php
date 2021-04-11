@@ -120,4 +120,11 @@ class UsersController extends AbstractController
         $usersSearched=$this->getDoctrine()->getRepository(User::class)->findUsersByStringForCalendar($request->request->get('str'),$id);
         return new Response(json_encode($usersSearched));
     }
+
+    // Dashboard - begging users from a string
+    public function begInvites(Request $request,$id)
+    {
+        $usersSearched=$this->getDoctrine()->getRepository(User::class)->findUsersByStringForBegging($request->request->get('str'),$id);
+        return new Response(json_encode($usersSearched));
+    }
 }

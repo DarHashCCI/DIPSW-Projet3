@@ -12,10 +12,6 @@ $( document ).ready(function() {
         else return 0;
     }
 
-    $('#begPeople').on('click',function(){
-        console.log(doesImgExist(7));
-    })
-
     //search modal - Close button. Aka "fixing Bootstrap's shit"
     $("#searchModal button.close").on("click",function(){
         $("#searchResults").html('');
@@ -164,8 +160,87 @@ $( document ).ready(function() {
     })
 
     // Search modal - Guesting - Showing the modal
+    $('body').on("click",'#begPeople', function(){
+        $("#searchModal .modal-title").text("Demander l'accès au calendrier");
+        $("#searchModal .modal-header").css("background-color","var(--zurvan-yellow)");
+        $("#searchModal .modal-content").css("border","1px solid var(--zurvan-yellow)");
+        $("#searchResults").css("border-color","var(--zurvan-yellow)");
+        $("#searchLoader").css("color","var(--zurvan-yellow)");
+        $("#searchModal").css("background-color",'var(--zurvan-yellow-modal)');
+        $("#searchity").prev().text('Info à chercher : ');
+        $('.modal-body .fa-search').attr("id","begPeople2");
+        $("#begPeople2").css("background-color","var(--zurvan-yellow)");
+        $("#searchModal .modal-footer").html("<button id=\"begPeopleButton\" type=\"button\" class=\"btn btn-primary\">Demander l'accès</button>")
+        $("#begPeopleButton").css("background-color","var(--zurvan-yellow)");
+        $("#begPeopleButton").css("border-color","var(--zurvan-yellow)");
+        $("#searchModal").toggle();
+    })
 
     // Search modal - Guesting - Searching for people to beg for an invite
+    $("body").on("click","#begPeople2",function(){
+        if($("#searchity").val().length>0){
+            $("#searchLoader").css('display','block');
+            $("#searchResults").css('display','none');
+            $("#searchResults").html('');
+            console.log($("#searchity").val());
+            $.ajax({
+                method: "POST",
+                url: "../calendar/beg/"+realId,
+                data: {str:$("#searchity").val()},
+                success: function(data){
+                    var don=JSON.parse(data);
+                    if(don.length==0){
+                        $("#searchResults").html("Aucun résultat trouvé");
+                    }
+                    else{
+                        don.forEach(function(user){
+                            $("#searchResults").append("<div class='searchResult'><input type=\"checkbox\" value='"+user.id+"'>Nom : "+user.last_name+" | Prénom : "+user.first_name+"<br>Email : "+user.email+"</div>");
+                        })
+                    }
+                    $("#searchLoader").css('display','none');
+                    $("#searchResults").css('display','block');
+                }
+            })
+        }
+    })
 
     // Search modal - Guesting - Sending beg
+    $("body").on("click","#begPeopleButton",function(){
+        if($( "#searchResults input:checked" ).length==0){
+            alert("Casper n'est pas sur cette appli !");
+        }
+        else{
+            var checked= [];
+            $('#searchResults input:checked').each(function() {
+                checked.push($(this).val());
+            });
+            $("#loadingModal").toggle();
+            $("#searchModal").toggle();
+            $.ajax({
+                method: "POST",
+                url: "../mail/calendar/"+realId+"/beg",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                data: JSON.stringify(checked),
+                processData: false,
+                success: function(data){
+                    $("#loadingModal").toggle();
+                    $('#messageModal .modal-content').text("Email(s) envoyé(s).")
+                    $("#messageModal").toggle();
+                    setTimeout(function(){
+                        $('#messageModal').toggle();
+                    },2000);
+                },
+                error: function(info){
+                    $("#loadingModal").toggle();
+                    $('#messageModal .modal-content').text("Email(s) envoyé(s).")
+                    $("#messageModal").toggle();
+                    setTimeout(function(){
+                        $('#messageModal').toggle();
+                    },2000);
+                }
+            })
+        }
+    })
 });

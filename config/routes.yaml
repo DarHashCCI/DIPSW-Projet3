@@ -21,6 +21,11 @@ calendar_get_potential_guests:
   path: /calendar/seek/{id}
   controller: App\Controller\UsersController::seekInvites
 
+calendar_beg_potential_invites:
+  methods: POST
+  path: /calendar/beg/{id}
+  controller: App\Controller\UsersController::begInvites
+
 
 #contacts
 contacts_index:
@@ -85,6 +90,11 @@ mail_calendar_invites:
   methods: POST
   path: /mail/calendar/{id}/invite
   controller: App\Controller\TestMailController::dashCalendarInvites
+
+mail_calendar_begging:
+  methods: POST
+  path: /mail/calendar/{id}/beg
+  controller: App\Controller\TestMailController::dashCalendarBeggar
 
 mail_calendar_request:
   methods: POST

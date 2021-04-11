@@ -86,6 +86,27 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->fetchAllAssociative();
     }
 
+    /* Find all users having a string in parts of their name or email to get invited
+     * $id is the user id
+     * $str is the part of the string that needs to be compared.
+     */
+
+    public function findUsersByStringForBegging($str,$id)
+    {
+        $entityManager=$this->getEntityManager();
+        $sql='SELECT u.id, u.email, u.first_name, u.last_name
+        FROM user u WHERE
+        (u.first_name LIKE :str OR u.last_name LIKE :str OR u.email LIKE :str
+        OR CONCAT(u.first_name," ",u.last_name) LIKE :str OR CONCAT(u.last_name," ",u.first_name) LIKE :str)
+        AND u.id!=:id AND u.id NOT IN(SELECT ez.user_source FROM user_user ez WHERE ez.user_target =:id)';
+        $query=$entityManager->getConnection()->prepare($sql);
+        $query->bindValue('str','%'.$str.'%');
+        $query->bindValue('id',$id);
+        $query->execute();
+
+        return $query->fetchAllAssociative();
+    }
+
     // Find all users who invited the user
     public function findInvitesforUser($id)
     {
