@@ -142,4 +142,9 @@ class UsersController extends AbstractController
         $response->headers->setCookie(Cookie::create('ZURVAN_COOKIE','bonjour'));
         return $response;
     }
+
+    // Legal notice page
+    public function legalNotice(){
+        return $this->render('legal.html.twig');
+    }
 }

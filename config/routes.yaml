@@ -112,6 +112,11 @@ mail_event_invite:
   path: /mail/event/{id}/invite
   controller: App\Controller\TestMailController::eventInvite
 
+#legal notice
+legal_notice:
+  methods: GET
+  path: /legal-notice
+  controller: App\Controller\UsersController::legalNotice
 
 #register
 register_success:
