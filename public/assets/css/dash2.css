@@ -73,6 +73,7 @@ section h2{
 #nextEvents{
     background-color: var(--zurvan-red);
     border: 1px solid var(--zurvan-red);
+    margin-bottom:20px;
 }
 #events{
     border-radius: 0 0 20px 20px;
@@ -140,4 +141,10 @@ section h2{
 
 .searchResult ~ .searchResult{
     border-top:1px solid black;
+}
+
+@media (min-width: 990px){
+    #nextEvents{
+        margin-bottom:10px;
+    }
 }

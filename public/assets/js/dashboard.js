@@ -12,13 +12,17 @@ $( document ).ready(function() {
         else return 0;
     }
 
-    //search modal - Close button. Aka "fixing Bootstrap's shit"
-    $("#searchModal button.close").on("click",function(){
+    function reinitSearchModal(){
         $("#searchResults").html('');
-        $("#searchity").text('');
+        $("#searchity").val('');
         $('.modal-body .fa-search').attr("id",'');
         $("#searchModal .modal-title").text('');
         $("#searchModal .modal-footer").html('');
+    }
+
+    //search modal - Close button. Aka "fixing Bootstrap's shit"
+    $("#searchModal button.close").on("click",function(){
+        reinitSearchModal();
         $("#searchModal").toggle();
     })
 
@@ -145,6 +149,7 @@ $( document ).ready(function() {
                     for(check in checked){
                         $("#calGuests .row").append("<a href=\"/profile/"+check+"\"><div class=\"miniAva\" style=\"background-image:url(../../uploads/ava/"+doesImgExist(checked[check])+".png);\"></div></a>")
                     }
+                    reinitSearchModal();
                 },
                 error: function(info){
                     $("#loadingModal").toggle();
@@ -154,6 +159,7 @@ $( document ).ready(function() {
                     for(check in checked){
                         $("#calGuests .row").append("<a href=\"/profile/"+checked[check]+"\"><div class=\"miniAva\" style=\"background-image:url(../../uploads/ava/"+doesImgExist(checked[check])+".png);\"></div></a>")
                     }
+                    reinitSearchModal();
                 }
             })
         }
@@ -216,6 +222,7 @@ $( document ).ready(function() {
             });
             $("#loadingModal").toggle();
             $("#searchModal").toggle();
+            reinitSearchModal();
             $.ajax({
                 method: "POST",
                 url: "../mail/calendar/"+realId+"/beg",
