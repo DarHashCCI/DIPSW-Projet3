@@ -11,9 +11,9 @@
     <div class="row" id="profile">
         <div class="col" id="avacol">
             {% if file_exists('./uploads/ava/' ~ user.id ~ '.png') %}
-            <img id="ava" src="{{ asset('uploads/ava/'~user.id~'.png') }}" alt="Avatar de l'utilisateur">
+            <img id="ava" src="{{ asset('uploads/ava/'~user.id~'.png')|imagine_filter('profileava') }}" alt="Avatar de l'utilisateur">
         {% else %}
-            <img id="ava" src="{{ asset('uploads/ava/0.png') }}" alt="Avatar de l'utilisateur">
+            <img id="ava" src="{{ asset('uploads/ava/0.png')|imagine_filter('profileava') }}" alt="Avatar de l'utilisateur">
         {% endif %}
             <form enctype="multipart/form-data">
             <input type="hidden" name="id" value="{{user.id}}">
@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col">
-            <div><strong>Email :</strong> {{ app.user.email }}</div>
+            <div><strong>Email :</strong> {{ user.email }}</div>
             <div><strong>Nom :</strong> <div {% if user.last_name %}id="lastname" >{{ user.last_name }}{% else %} id="lastnameempty">(non renseigné){% endif %}</div></div>
             <div><strong>Prénom :</strong> <div {% if user.first_name %}id="firstname" >{{ user.first_name }}{% else %} id="firstnameempty">(non renseigné){% endif %}</div></div>
             <div><strong>Sexe :</strong>

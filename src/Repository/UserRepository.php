@@ -40,7 +40,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findNonSecretInfo($id)
     {
         return $this->createQueryBuilder('u')
-            ->select(['u.id','u.first_name','u.last_name','u.sex','u.bio'])
+            ->select(['u.id','u.first_name','u.last_name','u.sex','u.bio','u.email'])
             ->where('u.id = :id')
             ->setParameter('id',$id)
             ->setMaxResults(1)

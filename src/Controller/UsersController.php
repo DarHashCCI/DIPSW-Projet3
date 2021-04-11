@@ -107,9 +107,13 @@ class UsersController extends AbstractController
     }
 
     // Profile page - avatar update
-    public function updateAva(Request $request,CacheManager $cacheManager, $id)
+    public function updateAva(Request $request, $id)
     {
-        $cacheManager->remove('/profileava/uploads/ava/'.$id.".png");
+        $fs= new Filesystem();
+        if($fs->exists($this->getParameter('kernel.project_dir').'/public/media/cache/profileava/uploads/ava/'.$id.".png")){
+            $fs->remove($this->getParameter('kernel.project_dir').'/public/media/cache/profileava/uploads/ava/'.$id.".png");
+            $fs->remove($this->getParameter('kernel.project_dir').'/public/media/cache/miniava/uploads/ava/'.$id.".png");
+        }
         $newava=$request->files->get('newava');
         $dest=$this->getParameter('kernel.project_dir').'/public/uploads/ava';
         $newava->move($dest,$id.".png");
