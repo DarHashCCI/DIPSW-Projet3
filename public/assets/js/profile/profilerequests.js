@@ -28,7 +28,7 @@ $( document ).ready(function() {
             data: {idDest:realId,idSender:ourRealId,mode:2},
             success: function(){
                 $('#loadingModal .modal-content').text("Autorisation accordée.")
-                $("#allowAccess").replaceWith("<button id=\"denyAccess\">Retirer l'accès au calendrier</button>");
+                $("#allowAccess").replaceWith("<button id=\"denyAccess\" class=\"btn btn-primary\">Retirer l'accès au calendrier</button>");
                 setTimeout(function(){
                     $('#loadingModal').toggle();
                 },2000);
@@ -46,7 +46,7 @@ $( document ).ready(function() {
             data: {idDest:realId,idSender:ourRealId,mode:3},
             success: function(){
                 $('#loadingModal .modal-content').text("Autorisation retirée.")
-                $("#denyAccess").replaceWith("<button id=\"allowAccess\">Donner l'accès au calendrier</button>");
+                $("#denyAccess").replaceWith("<button id=\"allowAccess\" class=\"btn btn-primary\">Donner l'accès au calendrier</button>");
                 setTimeout(function(){
                     $('#loadingModal').toggle();
                 },2000);

@@ -5,3 +5,45 @@
 #bio{
     white-space: pre-line;
 }
+
+.container{
+    margin-top:20px;
+}
+
+#profile{
+    border:1px solid var(--zurvan-green2-modal);
+    border-radius:20px;
+}
+
+#avacol{
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+    background-color: var(--zurvan-green2);
+    border-radius:20px 0 0 20px;
+}
+/* Profile request buttons*/
+#profileRequests{
+    margin: 10px 0 10px 0;
+    justify-content: space-evenly;
+}
+
+.btn-primary{
+    background-color: var(--zurvan-blue);
+    border-color: var(--zurvan-blue);
+}
+
+#requestInvite{
+    background-color: var(--zurvan-yellow);
+    border-color: var(--zurvan-yellow);
+}
+
+#denyAccess{
+    background-color: var(--zurvan-red);
+    border-color: var(--zurvan-red);
+}
+
+#allowAccess{
+    background-color: var(--zurvan-green);
+    border-color: var(--zurvan-green);
+}

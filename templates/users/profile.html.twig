@@ -8,8 +8,8 @@
 
 {% block body %}
 <div class="container">
-    <div class="row">
-        <div class="col">
+    <div class="row" id="profile">
+        <div class="col" id="avacol">
             {% if file_exists('./uploads/ava/' ~ user.id ~ '.png') %}
             <img id="ava" src="{{ asset('uploads/ava/'~user.id~'.png') }}" alt="Avatar de l'utilisateur">
         {% else %}
@@ -35,16 +35,16 @@
         </div>
     </div>
     {%  if app.user.id != user.id %}
-    <div class="row">
+    <div class="row" id="profileRequests">
         {% if isInvited or app.user.isAdmin() %}
-            <a href="{{ path('calendar',{id:user.id}) }}"><button>Calendrier</button></a>
+            <a href="{{ path('calendar',{id:user.id}) }}"><button class="btn btn-primary">Calendrier</button></a>
         {% else %}
-            <button id="requestInvite">Demander l'accès au calendrier</button>
+            <button id="requestInvite" class="btn btn-primary">Demander l'accès au calendrier</button>
         {% endif %}
         {% if hasInvited %}
-            <button id="denyAccess">Retirer l'accès au calendrier</button>
+            <button id="denyAccess" class="btn btn-primary">Retirer l'accès au calendrier</button>
         {% else %}
-            <button id="allowAccess">Donner l'accès au calendrier</button>
+            <button id="allowAccess" class="btn btn-primary">Donner l'accès au calendrier</button>
         {% endif %}
     </div>
     {% endif %}
