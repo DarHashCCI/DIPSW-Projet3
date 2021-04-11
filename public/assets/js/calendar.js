@@ -229,6 +229,7 @@ $( document ).ready(function() {
         $("#newDateModal .modal-footer button").css("background-color", fontColor);
         $("#newDateModal .modal-footer button").css("border-color", fontColor);
         $("#newDateModal .modal-header button").css("color", fontColor);
+        $("#newDateModal input").css("color", fontColor);
         $("#plsno").val($("#dontlookpls").val());
         $("#displayDateModal").toggle();
         $("#newDateModal").toggle();
@@ -291,10 +292,13 @@ $( document ).ready(function() {
         $("#inviteDateModal .modal-content").css("background-color", backColor);
         $("#inviteDateModal .modal-footer button").css("color", backColor);
         $("#inviteDateModal .modal-content").css("color", fontColor);
+        $("#inviteDateModal .row .fas").css("color", backColor);
+        $("#inviteDateModal .row .fas").css("background-color", fontColor);
         $("#inviteDateModal .modal-footer button").css("background-color", fontColor);
         $("#inviteDateModal .modal-footer button").css("border-color", fontColor);
         $("#inviteDateModal .modal-header button").css("color", fontColor);
         $("#inviteLoader").css("color", fontColor);
+        $("#searchResults").css("border-color",fontColor);
         $("#plsffs").val($("#dontlookpls").val());
         $("#displayDateModal").toggle();
         $("#inviteDateModal").toggle();
@@ -383,5 +387,6 @@ $( document ).ready(function() {
         $("#newDateModal .modal-footer button").css("background-color", $("#colorfont").val());
         $("#newDateModal .modal-footer button").css("border-color", $("#colorfont").val());
         $("#newDateModal .modal-header button").css("color", $("#colorfont").val());
+        $("#newDateModal input").css("color", $("#colorfont").val());
     })
 });

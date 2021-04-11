@@ -2,6 +2,98 @@
     display: none;
 }
 
+input{
+    background: none;
+}
+/* Calendar */
+#calendar-holder{
+    margin-top:20px;
+    background-color: var(--zurvan-blue);
+}
+
+.fc-header-toolbar{
+    padding-top:20px;
+    color:white;
+}
+
+/* Header buttons*/
+.fc-header-toolbar button{
+    background-color: white!important;
+    border-color:white!important;
+    color:var(--zurvan-blue)!important;
+}
+
+.fc-header-toolbar button:disabled{
+    background-color: var(--zurvan-red)!important;
+    border-color:var(--zurvan-red)!important;
+    color:white!important;
+}
+
+button.fc-button-active{
+    background-color: var(--zurvan-green)!important;
+    border-color:var(--zurvan-green)!important;
+    color:white!important;
+}
+
+/* Calendar body*/
+.fc-view-harness{
+    background-color: white;
+}
+
+.fc-theme-standard td,.fc-theme-standard th{
+    border-color:var(--zurvan-blue-modal)!important;
+}
+
+.fc-daygrid-day.fc-day-today{
+    background-color: var(--zurvan-blue-modal)!important;
+}
+
+/* Date modal */
+#newDateModal label{
+    display: inline-block;
+    width: 150px;
+    text-align: left;
+}
+
+#newDateModal textarea{
+    vertical-align: top;
+}
+
+#newDateButton{
+    background-color: black!important;
+    border-color:black!important;
+}
+
+/* Date display modal */
+#displayDateModal .modal-content{
+    padding: 0 20px 0 20px;
+}
+
+#displayDateModal label{
+    margin-right: 10px;
+}
+
+/* Search modal */
+#inviteDateModal .row{
+    margin:0 1rem 1rem 1rem;
+}
+
+#inviteDateModal .row label{
+    margin-top:10px;
+    margin-bottom: 0;
+}
+
+#inviteDateModal .row input{
+    margin:0 1rem 0 1rem;
+}
+
+#inviteDateModal .row .fas{
+    font-size: 30px;
+    background-color: black;
+    padding:10px;
+    border-radius: 50px;
+}
+
 #searchResults{
     height:200px;
     border:2px black solid;
