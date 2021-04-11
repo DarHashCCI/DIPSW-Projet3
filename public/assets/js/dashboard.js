@@ -29,8 +29,14 @@ $( document ).ready(function() {
     // Search modal - Contact - Showing the modal
     $('body').on("click",'#searchContacts', function(){
         $("#searchModal .modal-title").text('Recherche de contacts');
+        $("#searchModal .modal-header").css("background-color","var(--zurvan-blue)");
+        $("#searchModal .modal-content").css("border","1px solid var(--zurvan-blue)");
+        $("#searchResults").css("border-color","var(--zurvan-blue)");
+        $("#searchLoader").css("color","var(--zurvan-blue)");
+        $("#searchModal").css("background-color",'var(--zurvan-blue-modal)');
         $("#searchity").prev().text('Info à chercher : ');
         $('.modal-body .fa-search').attr("id","searchContacts2");
+        $("#searchContacts2").css("background-color","var(--zurvan-blue)");
         $("#searchModal").toggle();
     })
 
@@ -75,9 +81,17 @@ $( document ).ready(function() {
     // Search modal - Calendar invite - Showing the modal
     $('body').on("click",'#invitePeople', function(){
         $("#searchModal .modal-title").text('Inviter des utilisateurs');
+        $("#searchModal .modal-header").css("background-color","var(--zurvan-green2)");
+        $("#searchModal .modal-content").css("border","1px solid var(--zurvan-green2)");
+        $("#searchResults").css("border-color","var(--zurvan-green2)");
+        $("#searchLoader").css("color","var(--zurvan-green2)");
+        $("#searchModal").css("background-color",'var(--zurvan-green2-modal)');
         $("#searchity").prev().text('Info à chercher : ');
         $('.modal-body .fa-search').attr("id","invitePeople2");
+        $("#invitePeople2").css("background-color","var(--zurvan-green2)");
         $("#searchModal .modal-footer").html("<button id=\"invitePeopleButton\" type=\"button\" class=\"btn btn-primary\">Inviter</button>")
+        $("#invitePeopleButton").css("background-color","var(--zurvan-green2)");
+        $("#invitePeopleButton").css("border-color","var(--zurvan-green2)");
         $("#searchModal").toggle();
     })
 

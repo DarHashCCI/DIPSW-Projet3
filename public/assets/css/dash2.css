@@ -103,6 +103,31 @@ section h2{
     display:none;
 }
 
+#searchModal .modal-header, #searchModal .modal-header button{
+    color:white!important;
+}
+
+#searchModal .row{
+    margin:0 1rem 1rem 1rem;
+}
+
+#searchModal .row label{
+    margin-top:10px;
+    margin-bottom: 0;
+}
+
+#searchModal .row input{
+    margin:0 1rem 0 1rem;
+}
+
+#searchModal .row .fas{
+    font-size: 30px;
+    background-color: black;
+    color:white;
+    padding:10px;
+    border-radius: 50px;
+}
+
 #searchResults{
     height:200px;
     border:2px black solid;

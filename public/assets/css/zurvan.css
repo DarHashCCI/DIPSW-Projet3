@@ -1,15 +1,32 @@
 :root{
+    --zurvan-modal:#00000080;
     --zurvan-green:#78DE95;
+    --zurvan-green-modal:#78DE9580;
     --zurvan-green2:#62DE85;
+    --zurvan-green2-modal:#62DE8580;
     --zurvan-blue:#8E95DE;
+    --zurvan-blue-modal:#8E95DE80;
     --zurvan-red: #e05e5e;
+    --zurvan-red-modal: #e05e5e80;
     --zurvan-yellow: #dec66d;
+    --zurvan-yellow-modal: #dec66d80;
 }
 
 /* Common code */
 a{
     color:black;
     text-decoration: none!important;
+}
+
+input, input:focus{
+    border-right: none;
+    border-left: none;
+    border-top:none;
+    outline: none;
+}
+
+input:focus {
+    border-color: black;
 }
 
 /* Loading animation */
@@ -149,3 +166,21 @@ header{
 }
 
 /* Footer */
+
+/* Modals */
+.modal{
+    background-color: var(--zurvan-modal);
+}
+
+.close{
+    opacity:1;
+}
+
+.modal-header{
+    border-bottom:none;
+}
+
+.modal-footer{
+    border-top:none;
+    justify-content: space-around;
+}
