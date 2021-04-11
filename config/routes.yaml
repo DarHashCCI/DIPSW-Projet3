@@ -53,6 +53,12 @@ contact_update:
   path: /contact/update/{id}
   controller: App\Controller\ContactsController::update
 
+#cookie setter
+cookie_setter:
+  methods: POST
+  path: /cookie-monster
+  controller: App\Controller\UsersController::setShittyCookie
+
 #event CRUD
 event_create:
   methods: POST

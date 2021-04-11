@@ -57,8 +57,21 @@
                 </div>
             </div>
         </div>
+
+        <!-- The fucking cookie banner. Thanks Hugo Soltys -->
+        <div {% if app.request.cookies.has('ZURVAN_COOKIE')==true %}class="hidden"{% endif %} id="cookie-banner">
+            <div>
+         <span>
+                Ce site utilise des cookies pour améliorer votre expérience. En l'utilisant, vous acceptez les dits cookies.
+         </span>
+                <span id="consent-cookies">
+                Fermer
+         </span>
+            </div>
+        </div>
     </body>
     <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/cookiesetter.js') }}"></script>
     {% block scriptend %}{% endblock %}
 </html>

@@ -8,6 +8,7 @@ use App\Entity\User;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -17,7 +18,7 @@ class UsersController extends AbstractController
     //Redirection index
     //If user logged, redirected straight to dashboard
     //Else, sent to login window
-    public function index():Response
+    public function index(Request $request):Response
     {
         $session = new Session();
         if($session->get('_security.last_username')==null){
@@ -27,7 +28,7 @@ class UsersController extends AbstractController
     }
 
     //User dashboard
-    public function home(): Response
+    public function home(Request $request): Response
     {
         $session = new Session();
         if($session->get('_security.last_username')==null){
@@ -132,5 +133,13 @@ class UsersController extends AbstractController
     {
         $usersSearched=$this->getDoctrine()->getRepository(User::class)->findUsersByStringForBegging($request->request->get('str'),$id);
         return new Response(json_encode($usersSearched));
+    }
+
+    // Cookie function - I hate this.
+    public function setShittyCookie(Request $request)
+    {
+        $response=new Response();
+        $response->headers->setCookie(Cookie::create('ZURVAN_COOKIE','bonjour'));
+        return $response;
     }
 }
