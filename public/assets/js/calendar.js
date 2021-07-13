@@ -168,6 +168,7 @@ $( document ).ready(function() {
     $("#newDateModal button.close").on("click",function(){
         $("#newDateForm")[0].reset();
         $("#newDateModal").toggle();
+        resetEventForm();
     })
 
     // Date creation modal
@@ -425,12 +426,12 @@ $( document ).ready(function() {
     })
 
     // Date creation/update modal : color inputs behavior check
-    $("#colorback").on("change",function(){
+    $("#colorback").on("input",function(){
         $("#newDateModal .modal-content").css("background-color", $("#colorback").val());
         $("#newDateModal .modal-footer button").css("color", $("#colorback").val());
     })
 
-    $("#colorfont").on("change",function(){
+    $("#colorfont").on("input",function(){
         $("#newDateModal .modal-content").css("color", $("#colorfont").val());
         $("#newDateModal .modal-footer button").css("background-color", $("#colorfont").val());
         $("#newDateModal .modal-footer button").css("border-color", $("#colorfont").val());
