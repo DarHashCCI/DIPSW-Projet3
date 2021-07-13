@@ -113,7 +113,7 @@ $( document ).ready(function() {
             showOptions: {
                 direction: "down"
             },
-            buttonImage: "http://www.tutorialspark.com/jqueryUI/calender.png",
+            buttonImage: "../../assets/img/calender.png",
             autoSize: true,
             changeMonth: true,
             changeYear: true,
@@ -139,6 +139,18 @@ $( document ).ready(function() {
         $("#datepicker").datepicker( "setDate" , "+0d" );
     });
 
+	function resetEventForm()
+	{
+		$("#title").attr("placeholder",'');
+        $("#desc").attr("placeholder",'');
+		$("#newDateModal .modal-content").css("background-color", 'white');
+        $("#newDateModal .modal-footer button").css("color", 'white');
+        $("#newDateModal .modal-content").css("color", 'black');
+        $("#newDateModal .modal-footer button").css("background-color", 'black');
+        $("#newDateModal .modal-footer button").css("border-color", 'black');
+        $("#newDateModal .modal-header button").css("color", 'black');
+        $("#newDateModal input").css("color", 'black');
+	}
 
     //RGB to hex - used for the color input that don't accept rgb values
     function rgbToHex(r) {
@@ -204,6 +216,7 @@ $( document ).ready(function() {
                 data: {data:$("#newDateForm").serialize()},
                 success: function(){
                     $("#newDateForm")[0].reset();
+					resetEventForm();
                     calendar.refetchEvents();
                     $("#loadingModal").toggle();
                 }
@@ -312,6 +325,7 @@ $( document ).ready(function() {
                 data: {upd:$("#newDateForm").serialize()},
                 success: function(){
                     $("#newDateForm")[0].reset();
+					resetEventForm();
                     calendar.refetchEvents();
                     $("#loadingModal").toggle();
                 }

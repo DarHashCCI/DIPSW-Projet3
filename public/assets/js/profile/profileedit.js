@@ -1,6 +1,12 @@
 $( document ).ready(function() {
     var reredirUrl=redirUrl;
-    var realId=id;
+    var realId=id; /*id of the profile's owner*/
+	var checkId; /* check to see if we're watching our profile or not */
+	if(typeof ourId=='undefined'){
+		checkId=realId;
+	}
+	else checkId=ourId;
+	
     //Last name edit
     $("body").on("click","#lastnameempty",function(){
         $(this).replaceWith('<input id="lastnameedit" placeholder="Veuillez renseigner votre nom"></input>');
@@ -26,6 +32,7 @@ $( document ).ready(function() {
             })
         }
     });
+	
     //First name edit
     $("body").on("click","#firstnameempty",function(){
         $(this).replaceWith('<input id="firstnameedit" placeholder="Veuillez renseigner votre nom"></input>');
@@ -133,6 +140,7 @@ $( document ).ready(function() {
                     console.log("élément mis à jour");
                     d = new Date();
                     $("#ava").attr("src","../uploads/ava/"+realId+".png?"+d.getTime());
+					if(checkId==realId)
                     $("#avamin").css("background-image", "url(../uploads/ava/"+realId+".png?"+d.getTime()+")");
                 }
             })

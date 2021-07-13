@@ -94,6 +94,7 @@ $( document ).ready(function() {
                     });
                     $("#loadingModal").toggle();
                     $("#contactModal").toggle();
+                    $("#contactModal form").html('');
                 },
                 error: function(){
                     console.log("J'ai pas fait un truc");
@@ -152,14 +153,16 @@ $( document ).ready(function() {
                     });
                     $("#loadingModal").toggle();
                     $("#contactModal").toggle();
+                    $("#contactModal form").html('');
                 },
                 error: function () {
-                    $("#contact-"+contactId).html('');
+                    $("#contact-"+contactId).html('<div class=\"editButtons\"><i class=\"fas fa-pen\"></i><i class=\"fas fa-times\"></i></div>');
                     $("label").each(function(){
                         $("#contact-"+contactId).append("<strong>"+$(this).text()+"</strong> : "+$(this).next().val()+"<br>");
                     });
                     $("#loadingModal").toggle();
                     $("#contactModal").toggle();
+                    $("#contactModal form").html('');
                 }
             })
         }

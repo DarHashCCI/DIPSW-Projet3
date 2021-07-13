@@ -127,6 +127,7 @@ header, #profileWidget, .widgetButtons{
 }
 
 header{
+	margin-top: 20px;
     justify-content: space-between;
     padding:0 20px 0 20px;
 }
@@ -177,6 +178,8 @@ header{
 footer{
     margin-top:20px;
     margin-bottom:20px;
+	border:1px solid var(--zurvan-green);
+	border-radius:20px;
 }
 footer div{
     text-align:center;
@@ -213,6 +216,7 @@ footer div{
     bottom: 0;
     left: 0;
     background-color: var(--zurvan-green);
+	z-index:5;
 }
 
 #cookie-banner div {
